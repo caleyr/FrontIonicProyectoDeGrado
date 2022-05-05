@@ -1,0 +1,38 @@
+.form {
+    border-top: 6px solid var(--bg-color);
+    padding-top: 34px;
+
+    ion-list {
+        ion-item {
+            &:last-of-type {
+                margin-bottom: 5px !important;
+            }
+            ion-select{
+                &::part(icon) {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    p {
+        margin-bottom: 5;
+        color: var(--text-light);
+        font-size: .7rem;
+        letter-spacing: .5px;
+        font-weight: 400;
+        color: red;
+
+        span {
+            width: calc(100% - 35px);
+        }
+    }
+}
+
+img{
+    color: var(--bg-color);
+}
+
+.error{
+    margin-top: 0px;
+}

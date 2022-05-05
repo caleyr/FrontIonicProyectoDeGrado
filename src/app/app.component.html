@@ -1,0 +1,43 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay" *ngIf="apiService.roleUser === 'Administrador'">
+        <ion-header>
+            <ion-menu-toggle auto-hide="false">
+                <ion-icon class="zmdi zmdi-close"></ion-icon>
+            </ion-menu-toggle>
+
+            <div class="profile_info">
+                <ion-menu-toggle class="d-flex" auto-hide="false">
+                    <div class="text_box">
+                        <h2>Administrador</h2>
+                        <p>Recifaca</p>
+                    </div>
+                </ion-menu-toggle>
+            </div>
+        </ion-header>
+        <ion-content>
+            <ion-list lines="none">
+              <ion-menu-toggle auto-hide="false" *ngFor="let c of componentes | async" autoHide="false">
+                <ion-item [routerLink]="c.redirectTo" detail>
+                  <div class="item_inner d-flex">
+                    <div class="icon_box">
+                      <img [src]="c.icon">
+                    </div>
+                    <h2>{{ c.name }}</h2>
+                  </div>                  
+                </ion-item>
+              </ion-menu-toggle>              
+              <ion-item routerLink="login/" detail (click)="apiService.logOut()">
+                <div class="item_inner d-flex">
+                  <div class="icon_box">
+                    <img src="assets/images/log_out_primary.png">
+                  </div>
+                  <h2>Cerrar Sesión</h2>
+                </div>                  
+              </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

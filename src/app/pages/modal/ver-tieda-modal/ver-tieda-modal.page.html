@@ -1,0 +1,72 @@
+<ion-header style="background-image : url({{tienda.image}});">  
+  <ion-icon (click)="cerrarModal()" name="close-outline"></ion-icon>
+</ion-header>
+<ion-content class="bg_color" fullscreen>
+  <ion-list lines="none">
+    <div class="item_list">
+      <h1 class="name_shop">{{tienda.name}}</h1>
+    </div>    
+    <div class="item_list">      
+    <h1>Información de la tienda</h1>
+      <ion-item>
+        <div class="item_inner">
+            <div class="text_box">
+                <h3>Documento</h3>
+                <div class="buttons d-flex">
+                    <h5>{{tienda.documentType + ' ' + tienda.document}}</h5>
+                </div>
+            </div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="item_inner">
+            <div class="text_box">
+                <h3>Teléfono</h3>
+                <div class="buttons d-flex">
+                    <h5>{{tienda.phone}}</h5>
+                </div>
+            </div>
+        </div>
+      </ion-item>
+    </div>
+    <div>
+      <div class="item_list">
+        <h1>Lista de Materiales</h1>
+        <ion-item *ngFor="let material of materiales">
+            <div class="item_inner">
+                <div class="text_box">
+                    <h3>{{material.typeOfMaterial}}</h3>
+                    <div class="buttons d-flex">
+                        <h5>1 kg x 1</h5>
+                        <h4 class="ion-text-end end">$ {{material.price}}</h4>
+                    </div>
+                </div>
+            </div>
+        </ion-item>
+      </div>
+      <div class="form">
+        <ion-item lines="none">
+            <div class="item_inner d-flex" routerLink="/reciclador/calcular-material" (click)="enviarMaterial()">
+                <div class="icon_box ion-text-start"><ion-icon name="basket"></ion-icon></div>
+                <div>
+                    <h5>Calcular Material.</h5>
+                </div>
+            </div>
+        </ion-item>
+      </div>
+    </div>
+    <h1>Ubicación</h1>
+      <div class="item_list">
+          <ion-item>              
+            <div class="item_inner">
+              <div class="text_box">               
+                <h3 *ngIf="tienda.address.numberOne !== null">{{tienda.address.streetType + ' ' + tienda.address.career + ' #' + tienda.address.numberOne + ' - ' + tienda.address.numberTwo}}</h3>
+                <h3 *ngIf="tienda.address.numberOne === null">{{tienda.address.streetType + ' ' + tienda.address.career}}</h3>
+                <h3>{{tienda.address.description}}</h3>
+                <h3>Facatativá , {{tienda.address.neighborhood}}</h3>
+              </div>
+            </div>
+        </ion-item>
+      </div>
+  </ion-list>
+</ion-content>

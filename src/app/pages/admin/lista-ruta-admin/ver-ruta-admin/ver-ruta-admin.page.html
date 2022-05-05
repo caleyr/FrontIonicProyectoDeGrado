@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start" mode="md">
+          <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        <div class="title_inner d-flex">
+          Detalles de Ruta
+        </div>
+      </ion-title>
+  </ion-toolbar>
+  <ion-item lines="none">
+      <div class="item_inner">
+        <div class="d-flex item_info">
+          <div class="address_info">
+              <div class="from_to d-flex">
+                  <div class="icon_box d-flex">
+                      <ion-icon class="zmdi zmdi-pin"></ion-icon>
+                  </div>
+              </div>
+              <div class="dotted_icon">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+              </div>
+              <div class="from_to d-flex">
+                  <div class="icon_box d-flex">
+                      <ion-icon class="zmdi zmdi-navigation"></ion-icon>
+                  </div>
+              </div>
+          </div>
+          <div class="item_info d-flex">
+            <div class="item_details">
+              <h3 class="d-flex">
+                  {{reciclador.user?.email}}
+                  <span class="end order_status">
+                    <div *ngIf="ruta.endDate !== '0001-01-01T00:00:00'">
+                      {{ruta.endDate | date: 'shortDate'}}
+                    </div>
+                  </span>
+              </h3>
+              <h4 class="d-flex">{{ruta.startDate | date: 'shortDate'}}</h4>
+            </div>
+          </div>                         
+        </div>
+      </div>
+  </ion-item>
+</ion-header>
+
+<ion-content class="bg_color" fullscreen>
+  <ion-list lines="none">
+    <h1>Recolector</h1>
+    <!-- Residente --> 
+    <div class="item_list">
+      <ion-item>
+          <div class="item_inner">
+              <div class="text_box">
+                  <h3>Nombre y Apellido</h3>
+                  <div class="buttons d-flex">
+                      <h5>{{reciclador.name + ' ' +reciclador.lastName}}</h5>
+                  </div>
+              </div>
+          </div>
+      </ion-item>
+      <ion-item>
+        <div class="item_inner">
+            <div class="text_box">
+                <h3>Teléfono</h3>
+                <div class="buttons d-flex">
+                    <h5>{{reciclador.phone}}</h5>
+                </div>
+            </div>
+        </div>
+      </ion-item>
+    </div>
+    <div>
+      <h1>Puntos de Recoleccion</h1>
+      <ion-list>
+        <div class="item_list">
+          <ion-item *ngFor="let lista of punto" [routerLink]= "['/admin/lista-recoleccion-admin/ver-recoleccion-admin/', lista.state ,lista.id]" detailIcon="delete">
+            <div class="item_inner d-flex">
+                <div class="img_box center_img">
+                    <img src="{{lista.image}}" class="crop_img">
+                </div>
+                <div class="text_box_points">
+                    <h3>{{lista.typeOfMaterial}}</h3>
+                    <h4 class="d-flex">                
+                      <ion-icon class="zmdi zmdi-time ion-text-start"></ion-icon>
+                      {{lista.createDate | date: 'shortDate' }} <span>|</span> {{lista.createDate | date:'hh:mm a'}}
+                    </h4>  
+                    <h5 class="d-flex" *ngIf="lista.state === 'Espera'">
+                      {{lista.state}}
+                    </h5>                    
+                    <h5 class="d-flex" style="color: var(--red_color);" *ngIf="lista.state === 'Finalizado'">
+                      {{lista.state}}
+                    </h5>
+                    <h5 class="d-flex" style="color: var(--primary);" *ngIf="lista.state === 'Activo'">
+                      {{lista.state}}
+                    </h5>
+                </div>
+            </div>
+          </ion-item>
+        </div>
+      </ion-list>
+    </div>
+  </ion-list>
+</ion-content>

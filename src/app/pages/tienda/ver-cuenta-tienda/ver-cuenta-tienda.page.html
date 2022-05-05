@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-title>Mi Cuenta</ion-title>
+  </ion-toolbar>
+  <div class="profile_info">
+      <h2>{{tienda.name}}</h2>
+      <p>{{tienda.documentType + ' ' + tienda.document}}</p>
+      <p>{{tienda.user?.email}}</p>
+  </div>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list lines="none">
+
+      <ion-item routerLink="/tabs-tienda/ver-datos-tienda">
+        <div class="item_inner d-flex">
+            <div class="icon_box ion-text-start">
+                <img src="assets/images/perfil_primary.png">
+            </div>
+            <h2>Ver Datos</h2>
+        </div>
+      </ion-item>
+
+      <ion-item routerLink="/cuidados">
+        <div class="item_inner d-flex">
+            <div class="icon_box ion-text-start">
+                <img class="recycler" src="assets/images/logo_primary.png">
+            </div>
+            <h2>Cuidados</h2>
+        </div>
+      </ion-item> 
+
+      <ion-item routerLink="/login" (click)="apiService.logOut()">
+          <div class="item_inner d-flex">
+              <div class="icon_box ion-text-start">
+                  <img src="assets/images/log_out_primary.png">
+              </div>
+              <h2>Cerrar Sesión</h2>
+          </div>
+      </ion-item>
+  </ion-list>
+</ion-content>

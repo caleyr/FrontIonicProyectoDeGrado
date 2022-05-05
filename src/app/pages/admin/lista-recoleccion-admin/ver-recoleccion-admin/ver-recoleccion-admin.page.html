@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start" mode="md">
+          <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        <div class="title_inner d-flex">
+          Detalles
+        </div>
+      </ion-title>
+  </ion-toolbar>
+  <ion-item lines="none" *ngIf="estado !== 'Espera' && estado !== 'espera'">
+    <div class="item_inner">
+        <div class="item_info d-flex">
+            <div class="itme_img">
+                <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png">
+            </div>
+            <div class="d-flex">
+                <div class="item_details">
+                    <h3 class="d-flex">
+                      {{user.email}}
+                    </h3>
+                    <h4 class="d-flex">
+                      {{user.role}}
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+  </ion-item>
+</ion-header>
+
+<ion-content class="bg_color" fullscreen>
+  <ion-list lines="none">    
+    <h1>imagen</h1>
+    <div class="item_list">
+      <ion-item>
+        <div class="item_inner">
+            <div class="d-flex" style="align-items: flex-start;">
+              <div class="img_box center_img">
+                <img src="{{punto.image}}" class="crop_img">
+              </div>
+            </div>
+        </div>
+      </ion-item> 
+    </div>          
+    <h1>Punto de Recoleccion</h1>
+    <!-- Residente --> 
+    <div class="item_list">
+      <ion-item>
+          <div class="item_inner">
+              <div class="text_box">
+                  <h3>Tipo de Material</h3>
+                  <div class="buttons d-flex">
+                      <h5>{{punto.typeOfMaterial}}</h5>
+                  </div>
+              </div>
+          </div>
+      </ion-item>
+      <ion-item>
+        <div class="item_inner">
+            <div class="text_box">
+                <h3>Fecha</h3>
+                <div class="buttons d-flex">
+                    <h5>02-09-2011</h5>
+                </div>
+            </div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="item_inner">
+            <div class="text_box">
+                <h3>Descripcion</h3>
+                <div class="buttons d-flex">
+                    <h5>{{punto.description}}</h5>
+                </div>
+            </div>
+        </div>
+      </ion-item>
+    </div>
+    <h1>Dirección</h1>
+        <div class="item_list">
+            <ion-item>              
+              <div class="item_inner">
+                <div class="text_box">               
+                  <h3>{{direccion.streetType}} {{direccion.career}} #{{direccion.numberOne}}-{{direccion.numberTwo}}</h3>
+                  <h3>{{direccion.description}}</h3>
+                  <h3>Facatativá , {{direccion.neighborhood}}</h3>
+                </div>
+              </div>
+          </ion-item>
+        </div>
+  </ion-list>
+</ion-content>

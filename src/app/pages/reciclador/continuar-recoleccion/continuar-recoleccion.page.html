@@ -1,0 +1,119 @@
+<ion-header>
+	<ion-toolbar>		
+		<ion-title>
+            <div class="d-flex" [ngClass]="fabAction ? 'active' : ''">
+                <ion-icon class="zmdi zmdi-pin start ion-text-start"></ion-icon>
+                <span>Recorrido</span>
+                <div class="order_info_button end" (click)="toggleFab()">
+                    <span class="info">
+                        <ion-icon class="ion-text-start" name="add-circle-outline"></ion-icon>
+                        Información
+                    </span>
+                    <span class="cloes">
+                        <ion-icon class="ion-text-start" name="close-circle-outline"></ion-icon>
+                        Cerrar
+                    </span>
+                </div>
+            </div>
+        </ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <div class="order_info" [ngClass]="fabAction ? 'active' : ''" *ngIf="destino">
+        <div class="item_container">
+            <div class="item">
+                <h2>Descripcion</h2>
+                <p class="d-flex">
+                    <span class="item_about">{{destino.description}}</span>
+                </p>
+            </div>
+        </div>        
+    </div>
+    <div class="order_info" [ngClass]="fabAction ? 'active' : ''" *ngIf="!destino">
+        <div class="item_container">
+            <div class="item">
+                <h2>Descripcion</h2>
+                <p class="d-flex">
+                    <span class="item_about"><ion-skeleton-text animated style="width: 80%"></ion-skeleton-text></span>
+                </p>
+            </div>
+        </div>        
+    </div>
+	<div class="map" #mapVerificar>
+	</div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <ion-card *ngIf="destino">
+        <div class="card_header d-flex">
+            <div class="img_box">
+                <img src="assets/registro/registro2.png">
+            </div>
+            <div class="text_box">
+                <h2>{{destino.typeOfMaterial}}</h2>
+                <h3>{{distancia}} km <span>({{duracion}} min)</span></h3>
+            </div>
+            <div class="direction end" (click)="modalImagen(destino.image)">
+                <ion-icon class="ion-text-start" name="camera-outline"></ion-icon>
+                Foto
+            </div>
+        </div>
+        <div class="delivery_details">
+            <div class="delivery_address d-flex">
+                <ion-icon class="zmdi zmdi-pin ion-text-center"></ion-icon>
+                <div class="text_box">
+                    <h2>Destino</h2>
+                    <p>Facatativa, {{destino.address.neighborhood}}, {{destino.address.streetType}}{{destino.address.career}} {{destino.address.numberOne}}-{{destino.address.numberTwo}}</p>
+                </div>
+            </div>
+            <div class="dotted">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="delivery_address d-flex">
+                <ion-icon class="zmdi zmdi-navigation ion-text-center"></ion-icon>
+                <div class="text_box">                    
+                    <h2 class="pd">Tu Ubicacion</h2>
+                </div>
+            </div>
+        </div>
+    </ion-card>
+
+
+    <ion-card *ngIf="!destino">
+        <div class="card_header d-flex">
+            <div class="img_box">
+                <img src="assets/registro/registro2.png">
+            </div>
+            <div class="text_box">
+                <h2><ion-skeleton-text animated style="width: 20%"></ion-skeleton-text></h2>
+                <h3>km <span>( min)</span></h3>
+            </div>
+        </div>
+        <div class="delivery_details">
+            <div class="delivery_address d-flex">
+                <ion-icon class="zmdi zmdi-pin ion-text-center"></ion-icon>
+                <div class="text_box">
+                    <h2>Destino</h2>
+                    <p><ion-skeleton-text animated style="width: 80%"></ion-skeleton-text></p>
+                </div>
+            </div>
+            <div class="dotted">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="delivery_address d-flex">
+                <ion-icon class="zmdi zmdi-navigation ion-text-center"></ion-icon>
+                <div class="text_box">                    
+                    <h2 class="pd">Tu Ubicacion</h2>
+                </div>
+            </div>
+        </div>
+    </ion-card>
+
+    <ion-button *ngIf="finalizar == false" size="large" shape="full" class="btn" disabled={{boton}} (click)="confirmarPuntoMsj()">Confirmar Ruta</ion-button>
+    <ion-button *ngIf="finalizar == true" size="large" shape="full" class="btn" disabled={{boton}} (click)="confirmarRutaMsj()">Finalizar Recorrido</ion-button>
+</ion-footer>

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+          Verificación
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="form">
+    <form [formGroup]="form" (ngSubmit)="enviarCodigo()" #Form="ngForm">
+      <ion-list lines="none">
+            <h2> Ingrese el código de verificación que hemos enviado al correo {{email}}</h2>
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+                    <div class="input_box">
+                        <ion-label mode="md" position="stacked">Introduzca el código de verifiación</ion-label>
+                        <ion-input mode="md" type="text" placeholder="" inputmode="text" maxLength="6" formControlName="codigo"></ion-input>
+                    </div>
+                </div>
+            </ion-item>            
+      </ion-list>
+    </form>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-button size="large" expand="full" class="btn" (click)="Form.ngSubmit.emit()">Continuar</ion-button>
+</ion-footer>
+

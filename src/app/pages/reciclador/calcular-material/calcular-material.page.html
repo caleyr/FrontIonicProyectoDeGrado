@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">          
+        <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+          Material
+      </ion-title>
+      <ion-buttons slot="end" *ngIf="segment == 1">
+        <ion-button (click)="eliminarDatos()">
+          <ion-icon class="btaa" name="reload-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      
+  </ion-toolbar>
+  <ion-segment (ionChange)="segmentoCambiado()" [(ngModel)]="segment">
+    <ion-segment-button mode="ios" value="0">
+        <ion-label>Agregar</ion-label>
+    </ion-segment-button>
+    <ion-segment-button mode="ios" value="1">
+        <ion-label>Total</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div class="banner" *ngIf="segment == 1">
+    <h2>PRECIO TOTAL</h2>
+    <h1>$ {{total}}</h1>
+  </div>
+</ion-header>
+
+<ion-content class="bg_color" fullscreen>
+    <ion-slides #slides (ionSlideDidChange)="sliderCambiado()">
+      <ion-slide>
+        <ion-list lines="none">   
+          <div class="form">
+            <ion-item lines="none">
+              <div class="item_inner d-flex">
+                  <div class="input_box">
+                      <ion-label mode="md" position="stacked">Tipo de Material</ion-label>
+                      <div class="d-flex" style="align-items: flex-end;">
+                          <ion-select [(ngModel)]="material" placeholder="Seleccionar">
+                              <ion-select-option *ngFor="let lista of listaMateriales" [value]="lista" >{{lista.typeOfMaterial}}</ion-select-option>
+                          </ion-select>
+
+                          <ion-icon class="zmdi zmdi-chevron-down ion-text-end end"></ion-icon>
+                      </div>
+                  </div>
+              </div>
+            </ion-item>
+
+            <div class="item_price" *ngIf="material.typeOfMaterial !== undefined">
+              <ion-row>
+                <ion-col size="6">
+                    <ion-item lines="none">
+                        <div class="item_inner d-flex">
+                            <div class="input_box">
+                                <ion-label mode="md" class="dsb" position="stacked">Precio del Material</ion-label>
+                                <ion-input mode="md" class="dsb" disabled type="name" value="$ {{material.price}}"></ion-input>
+                            </div>
+                        </div>
+                    </ion-item>
+                </ion-col>
+
+                <ion-col size="6">
+                    <ion-item lines="none">
+                        <div class="item_inner d-flex">
+                            <div class="input_box">
+                                <ion-label mode="md" position="stacked" class="ion-text-end">Peso x Kg</ion-label>
+                                <ion-input mode="md" type="text" inputmode="numeric" maxLength="2" class="ion-text-end" placeholder="0" [(ngModel)]="cantidad"></ion-input>
+                            </div>
+                        </div>
+                    </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <h3 class="d-flex end" [ngStyle]="{'color': cantidad === 0 ? 'var(--red_color)' : 'var(--bg-color)'}">
+                <ion-icon name="warning-outline"></ion-icon>
+                  Este campo es requerido.
+              </h3>
+            </div>
+        </div>
+        </ion-list>
+      </ion-slide>
+      <ion-slide>
+        <ion-list lines="none" class="list_detaills">
+          <ion-item *ngFor="let item of historial">
+            <ion-row>
+                <ion-col size="6">
+                    <h3><strong>{{item.material.typeOfMaterial}}</strong></h3>
+                    <p>Cantidad {{item.cantidad}}</p>
+                </ion-col>
+                <ion-col size="6" class="ion-text-end">
+                    <h3>$ {{item.material.price}}</h3>
+                    <p>Ganancias </p>
+                </ion-col>
+            </ion-row>
+          </ion-item>               
+        </ion-list>
+      </ion-slide>
+    </ion-slides>
+</ion-content>
+<ion-footer  class="ion-no-border">    
+    <ion-button size="large" expand="full" class="btn" *ngIf="segment == 0" (click)="agregarHistorial()">Agregar</ion-button>
+</ion-footer>

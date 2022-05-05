@@ -1,0 +1,36 @@
+[
+    {
+        "nombre": "Avenida"
+    },
+    {
+        "nombre": "Avenida Calle"
+    },
+    {
+        "nombre": "Avenida Carrera"
+    },
+    {
+        "nombre": "Calle"
+    },
+    {
+        "nombre": "Carrera"
+    },    
+    {
+        "nombre": "Circular"
+    },
+    {
+        "nombre": "Cincunvalar"
+    },
+    {
+        "nombre": "Diagonal"
+    },
+    
+    {
+        "nombre": "Manzana"
+    },
+    {
+        "nombre": "Transversal"
+    },
+    {
+        "nombre": "Vía"
+    }    
+]

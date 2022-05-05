@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ReciFaca</string>
+    <string name="title_activity_main">ReciFaca</string>
+    <string name="package_name">com.recifaca.udec</string>
+    <string name="custom_url_scheme">com.recifaca.udec</string>
+</resources>

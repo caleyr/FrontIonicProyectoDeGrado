@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-button (click)="modalController.dismiss()">
+            <ion-icon name="arrow-back" color="dark"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+      <ion-title>
+        Confirma la ubicación deseada
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="map" id="map">
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-button size="large" expand="full" class="btn" (click)="crearDireccion()">Confirmar</ion-button>
+</ion-footer>

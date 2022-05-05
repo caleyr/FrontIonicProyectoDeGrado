@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start" mode="md">
+          <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        <div class="title_inner d-flex">
+          Foto
+        </div>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  <ion-img src="assets/registro/registro2.png"></ion-img>
+</ion-content>
+<ion-footer class="ion-no-border animate__animated animate__fadeInUp">  
+  <ion-button (click)="addNewToGallery()" size="large" expand="full" class="btn">Foto<ion-icon slot="end" name="camera"></ion-icon></ion-button>
+</ion-footer>

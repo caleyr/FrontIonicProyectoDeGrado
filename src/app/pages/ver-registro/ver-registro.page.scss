@@ -1,0 +1,38 @@
+ion-slides {
+    height: 100%;
+  }
+
+  .swiper-slide {
+    display: block;
+  }
+
+  .img1{
+    max-height: 40%;
+    max-width: 65%;
+    margin-left: 18%;
+  }
+
+  .img2{
+    max-height: 40%;
+    max-width: 67%;
+    margin-left: 15%;
+  }
+
+  .img3{
+    max-height: 40%;
+    max-width: 59%;
+    margin-left: 25%;
+  }
+
+  p {
+    font-size: 20px;   
+  }
+
+  h2{
+    font-size: 30px;
+    color: var(--primary);
+  }
+
+  ion-button {
+    color: var(--primary);
+  }

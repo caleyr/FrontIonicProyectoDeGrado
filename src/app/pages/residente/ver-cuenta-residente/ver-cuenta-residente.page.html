@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-title>Mi Cuenta</ion-title>
+  </ion-toolbar>
+  <div class="profile_info">
+      <h2>{{residente.name + ' ' + residente.lastName}}</h2>
+      <p>{{residente.phone}}</p>
+      <p>{{residente.user?.email}}</p>
+  </div>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list lines="none">
+
+      <ion-item routerLink="/residente/ver-datos-residente">
+        <div class="item_inner d-flex">
+            <div class="icon_box ion-text-start">
+                <img src="assets/images/perfil_primary.png">
+            </div>
+            <h2>Ver Datos</h2>
+        </div>
+      </ion-item>
+
+      <ion-item routerLink="/tabs-residente/ver-historial">
+          <div class="item_inner d-flex">
+              <div class="icon_box ion-text-start">
+                  <img class="recycler" src="assets/images/logo_primary.png">
+              </div>
+              <h2>Publicaciones</h2>
+          </div>
+      </ion-item>
+
+      <ion-item routerLink="/tabs-residente/crear-publicacion">
+          <div class="item_inner d-flex">
+              <div class="icon_box ion-text-start">
+                  <img class="recycler" src="assets/images/logo_primary.png">
+              </div>
+              <h2>Crear Reciclaje</h2>
+          </div>
+      </ion-item>
+
+      <ion-item routerLink="/residente/ver-comentario-residente">
+        <div class="item_inner d-flex" >
+            <div class="icon_box ion-text-start">
+                <img class="recycler" src="assets/images/notification_primary.png">
+            </div>
+            <h2>Notificaciones</h2>
+        </div>
+      </ion-item> 
+      
+      <ion-item routerLink="/cuidados">
+        <div class="item_inner d-flex" >
+            <div class="icon_box ion-text-start">
+                <img class="recycler" src="assets/images/logo_primary.png">
+            </div>
+            <h2>Cuidados</h2>
+        </div>
+      </ion-item> 
+
+      <ion-item (click)="apiService.logOut()">
+          <div class="item_inner d-flex">
+              <div class="icon_box ion-text-start">
+                  <img src="assets/images/log_out_primary.png">
+              </div>
+              <h2>Cerrar Sesión</h2>
+          </div>
+      </ion-item>
+  </ion-list>
+</ion-content>

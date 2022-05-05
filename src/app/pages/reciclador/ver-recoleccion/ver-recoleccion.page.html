@@ -1,0 +1,94 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>
+			<div class="title_inner d-flex">
+                <ion-icon class="zmdi zmdi-pin start ion-text-start"></ion-icon>
+				<span class="offline">Ruta</span>
+				<div class="online_offline_button end" (click)="toggleFab()">
+					Empezar
+				</div>
+			</div>
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="map" #mapVer >
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border" [ngClass]="fabAction ? 'active' : ''">
+    <div class="footer_content">
+        <div class="address">
+            <h2 class="d-flex">
+                <span class="map_pin"></span>
+                {{ubicacion}}
+            </h2>
+        </div>
+
+        <div class="form">
+            <ion-list lines="none">
+                <div class="address_title">
+                    <h3>Tipo de Material</h3>
+                    <ion-radio-group [(ngModel)]="material">
+                        <ion-row>
+                            <ion-col size="6">
+                                <ion-item lines="none">
+                                    <ion-radio slot="start" value="Plastico"></ion-radio>
+                                    <ion-label class="d-flex">
+                                        <div class="img_container">
+                                            <div class="img_box">
+                                                <img src="assets/images/logo_primary_gris.png">
+                                                <img src="assets/images/logo_primary_white.png">
+                                            </div>
+                                            <h2>Plastico</h2>
+                                        </div>
+                                    </ion-label>
+                                </ion-item>
+                                <ion-item lines="none">
+                                    <ion-radio slot="start" value="CartonYPapel"></ion-radio>
+                                    <ion-label class="d-flex">
+                                        <div class="img_container">
+                                            <div class="img_box">
+                                                <img src="assets/images/logo_primary_gris.png">
+                                                <img src="assets/images/logo_primary_white.png">
+                                            </div>
+                                            <h2>Carton & Papel</h2>
+                                        </div>
+                                    </ion-label>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6">
+                                <ion-item lines="none">
+                                    <ion-radio slot="start" value="VidrioOMetal"></ion-radio>
+                                    <ion-label class="d-flex">
+                                        <div class="img_container">
+                                            <div class="img_box">
+                                                <img src="assets/images/logo_primary_gris.png">
+                                                <img src="assets/images/logo_primary_white.png">
+                                            </div>
+                                            <h2>Vidrio O Metal</h2>
+                                        </div>
+                                    </ion-label>
+                                </ion-item>
+                                <ion-item lines="none">
+                                    <ion-radio slot="start" value="Todos"></ion-radio>
+                                    <ion-label class="d-flex">
+                                        <div class="img_container">
+                                            <div class="img_box">
+                                                <img src="assets/images/logo_primary_gris.png">
+                                                <img src="assets/images/logo_primary_white.png">
+                                            </div>
+                                            <h2>Todos</h2>
+                                        </div>
+                                    </ion-label>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </div>
+            </ion-list>
+        </div>
+    </div>    
+    <ion-button size="large" expand="full" class="btn" (click)="buscarRuta()">Nueva Ruta</ion-button>
+</ion-footer>

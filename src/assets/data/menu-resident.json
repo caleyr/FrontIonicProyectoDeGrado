@@ -1,0 +1,17 @@
+[
+    {
+        "icon": "archive-outline",
+        "name": "Publicaciones",
+        "redirectTo": "/residente/lista-recoleccion-residente"
+    },
+    {
+        "icon": "archive-outline",
+        "name": "Crear Reciclaje",
+        "redirectTo": "/residente/crear-punto-recoleccion"
+    },
+    {
+        "icon": "archive-outline",
+        "name": "Ver Datos",
+        "redirectTo": "/residente/ver-datos-residente"
+    }
+]

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+          Recuperar Contraseña
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <form [formGroup]="form" (ngSubmit)="recuperarPassword()" #Form="ngForm">
+        <div class="form">
+            <ion-list lines="none">      
+                <ion-item lines="none">
+                  <div class="item_inner d-flex">
+                      <div class="icon_box ion-text-start"><img src="assets/images/mail_primary.png"></div>
+                      <div class="input_box">
+                          <ion-label mode="md" position="stacked">Correo</ion-label>
+                          <ion-input mode="md" type="email" placeholder="Correo" inputmode="numeric" formControlName="correo"></ion-input>
+                      </div>
+                  </div>
+                </ion-item>
+                <p class="d-flex" [ngStyle]="{'color':getCorreo().errors && getCorreo().touched ? 'red' : 'var(--bg-color)'}">
+                    <br>
+                    <span *ngIf="getCorreo().hasError('required')" class="end">  
+                        <ion-icon name="warning-outline"></ion-icon>
+                        Este campo es requerido.
+                    </span>
+                    <span *ngIf="getCorreo().hasError('email')" class="end">  
+                        <ion-icon name="warning-outline"></ion-icon>
+                        El correo no es válido.
+                    </span>
+                </p>                
+            </ion-list>            
+        </div>
+    </form>  
+</ion-content>
+<ion-footer>    
+    <ion-button size="large" expand="full" class="btn" (click)="Form.ngSubmit.emit()">Enviar Código</ion-button>
+</ion-footer>

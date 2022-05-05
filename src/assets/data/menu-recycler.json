@@ -1,0 +1,17 @@
+[
+    {
+        "icon": "archive-outline",
+        "name": "Recoleccion",
+        "redirectTo": "/reciclador/ver-recoleccion"
+    },
+    {
+        "icon": "archive-outline",
+        "name": "Puntos de Venta",
+        "redirectTo": "/reciclador/ver-tienda"
+    },
+    {
+        "icon": "archive-outline",
+        "name": "Ver Datos",
+        "redirectTo": "/reciclador/ver-datos-reciclador"
+    }
+]

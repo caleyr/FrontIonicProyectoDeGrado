@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start" mode="md">
+        <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div>
+    <h2>CUIDADOS</h2>
+  </div> 
+  <ion-slides pager="true">
+    <ion-slide *ngFor="let slide of slides">    
+      <div>
+        <img [src]="slide.img">
+      </div>
+      <div>
+        <h3>{{slide.descripcion}}</h3>
+      </div>
+    </ion-slide>
+  </ion-slides>  
+</ion-content>
+
+<!--
+<ion-footer>
+  <ion-button fill="clear" routerLink="/inicio" >Cotinuar<ion-icon slot="end"
+    name="arrow-forward"></ion-icon>
+  </ion-button>
+</ion-footer>
+-->

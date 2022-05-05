@@ -1,0 +1,18 @@
+ion-content {
+    ion-item {
+        height: 100%;
+        .item_inner{
+            position: absolute; 
+            height: 100%;
+            ion-textarea {  
+                position: absolute;      
+                margin: 0;
+                height: 100%;
+                color: var(--text-dark);
+                font-size: .9rem;
+                letter-spacing: 1px;
+            }
+        }
+        
+    }
+}

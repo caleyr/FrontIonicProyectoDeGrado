@@ -1,0 +1,30 @@
+.container {
+    width: calc(100% - 47px);
+    margin: 0 auto;    
+
+    .img_box {
+        width: 210px;
+        margin: 0 auto;
+        margin-top: 36%;
+        margin-bottom: 31px;
+    }
+
+    h1 {
+        color: var(--text-black);
+        margin: 0;
+        font-size: 1.3rem;
+        font-weight: 600;
+
+
+        small {
+            display: block;
+            font-weight: 400;
+            font-size: 1rem;
+            padding-top: 4px;
+        }
+    }
+}
+
+ion-footer {
+    --animate-duration: .4s !important;
+}

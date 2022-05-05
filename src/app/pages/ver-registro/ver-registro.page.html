@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding" scroll-y="false">
+  <ion-slides pager=true>
+    <ion-slide>
+      <div class="slide">
+        <div class="img1">
+          <img src="assets/registro/registro2.png" />
+        </div>
+        <h2>RESIDENTE</h2>
+        <p>Este usuario podra publicar el reciclaje para su respectiva recoleccion.</p>
+        <ion-button fill="clear" routerLink="registro/residente" >Registrate <ion-icon slot="end"
+            name="arrow-forward"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="slide">
+        <div class="img2">
+          <img src="assets/registro/registro1.png" />
+        </div>
+        <h2>RECICLADOR</h2>
+        <p>Este usuario esta encargado recolectar las publicaciones de reciclaje.</p>
+        <ion-button fill="clear" routerLink="registro/reciclador">Registrate<ion-icon slot="end"
+            name="arrow-forward"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="slide">
+        <div class="img3">
+          <img src="assets/registro/registro3.png" />
+        </div>
+        <h2>TIENDA</h2>
+        <p>Este usuario esta encargado de publicar el precio de cada material reciclado.</p>
+        <ion-button fill="clear" routerLink="registro/tienda">Registrate<ion-icon slot="end"
+            name="arrow-forward"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

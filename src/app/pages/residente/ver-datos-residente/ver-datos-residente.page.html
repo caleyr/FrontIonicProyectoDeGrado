@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start" mode="md">
+        <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        <div class="title_inner d-flex">
+          <span class="offline">Ver Perfil</span>
+        </div>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="bg_color" fullscreen>
+  <ion-list lines="none">      
+      <div class="item_list">
+        <h1>Informacion del Usuario</h1>
+        <ion-item>
+          <div class="item_inner">
+              <div class="text_box">
+                  <h3>Correo</h3>
+                  <div class="buttons d-flex">
+                      <h5>{{usuario.email}}</h5>
+                  </div>
+              </div>
+          </div>
+        </ion-item>
+      </div>
+
+      <div class="item_list">
+        <h1>Datos Personales</h1>
+        <ion-item>
+            <div class="item_inner">
+                <div class="text_box">
+                    <h3>Nombre</h3>
+                    <div class="buttons d-flex">
+                        <h5>{{residente.name}}</h5>
+                    </div>
+                </div>
+            </div>
+        </ion-item>
+        <ion-item>
+          <div class="item_inner">
+              <div class="text_box">
+                  <h3>Apellido</h3>
+                  <div class="buttons d-flex">
+                      <h5>{{residente.lastName}}</h5>
+                  </div>
+              </div>
+          </div>
+      </ion-item>
+        <ion-item>
+          <div class="item_inner">
+              <div class="text_box">
+                  <h3>Teléfono</h3>
+                  <div class="buttons d-flex">
+                      <h5>{{residente.phone}}</h5>
+                  </div>
+              </div>
+          </div>
+        </ion-item>
+      </div>
+
+      <div>
+        <ion-item [routerLink]="['/residente/editar-datos-residente', residente.id]" class="button_detail">
+          <ion-icon name="create-outline" slot="start"></ion-icon>        
+          <h5>Editar Datos</h5>
+        </ion-item>        
+      </div>
+
+      <div *ngIf="direccion.length!==0">        
+        <h1>Direccion</h1>
+        <ion-list>
+          <div class="item_list">
+              <ion-item *ngFor="let listaD of direccion" (click)="actualizarDireccion(listaD)">
+                <div class="item_inner">
+                    <div class="text_box">               
+                      <h3 *ngIf="listaD.numberOne !== null">{{listaD.streetType + ' ' + listaD.career + ' #' + listaD.numberOne + ' - ' + listaD.numberTwo}}</h3>
+                      <h3 *ngIf="listaD.numberOne === null">{{listaD.streetType + ' ' + listaD.career}}</h3>
+                      <h3>{{listaD.description}}</h3>
+                      <h3>Facatativá , {{listaD.neighborhood}}</h3>
+                    </div>
+                </div>     
+                <ion-button (click)="presentPopover($event, listaD.id)" expand="block" fill="clear" shape="round">                  
+                  <ion-icon id="hover-button" slot="end" name="ellipsis-vertical-outline"></ion-icon>
+                </ion-button>           
+              </ion-item>
+          </div>
+        </ion-list>
+      </div>
+
+      <div *ngIf="direccion.length < 4">
+        <ion-item [routerLink]= "['/usuarios/agregar-direccion/residente/crear', residente.id]" class="button_detail">
+          <ion-icon name="location-sharp" slot="start"></ion-icon>
+          <h5>Agregar Domicilio</h5>
+        </ion-item>        
+      </div>
+
+  </ion-list>
+</ion-content>

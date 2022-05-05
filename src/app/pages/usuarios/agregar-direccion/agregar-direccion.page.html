@@ -1,0 +1,175 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start" mode="md">
+          <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        <div *ngIf="state === 'crear' || state === 'crearPunto'">
+          Agregar Dirección
+        </div>
+        <div *ngIf="state === 'actualizar'">
+          Actualizar Dirección
+        </div>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color" fullscreen>
+  <form [formGroup]="form" (ngSubmit)="guardarDireccion()" #Form="ngForm">
+    <ion-list lines="none">
+        <div class="form">
+            <ion-item lines="none">
+              <div class="item_inner d-flex">
+                  <div class="input_box">
+                      <ion-label mode="md" position="stacked" style="opacity: 1;">Lugar</ion-label>
+                      <ion-input mode="md" type="name" formControlName="lugar"></ion-input>
+                  </div>
+              </div>
+            </ion-item>
+
+            <h3 class="d-flex end" [ngStyle]="{'color':getLugar().errors && getLugar().touched ? 'var(--red_color)' : 'var(--bg-color)'}">
+              <ion-icon name="warning-outline"></ion-icon>
+              <div *ngIf="getLugar().hasError('required')">
+                Este campo es requerido.
+              </div>
+            </h3>
+
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+                    <div class="input_box">
+                        <ion-label mode="md" position="stacked">Barrio</ion-label>
+                        <ion-input mode="md" type="text" placeholder="Barrio" formControlName="barrio" maxLength="20"></ion-input>
+                    </div>
+                </div>
+            </ion-item>
+
+            <h3 class="d-flex end" [ngStyle]="{'color':getBarrio().errors && getBarrio().touched ? 'var(--red_color)' : 'var(--bg-color)'}">
+              <ion-icon name="warning-outline"></ion-icon>
+              <div *ngIf="getBarrio().hasError('required')">
+                Este campo es requerido.
+              </div>
+            </h3>
+
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+                    <div class="input_box">
+                        <ion-label mode="md" position="stacked">Tipo de Calle</ion-label>
+                        <div class="d-flex" style="align-items: flex-end;">
+                            <ion-select formControlName="tipoCalle" placeholder="Seleccionar" [selectedText]="direccion.streetType">
+                                <ion-select-option *ngFor="let lista of listaTipoDirecciones" [value]="lista.nombre">{{lista.nombre}}</ion-select-option>
+                            </ion-select>
+                            
+                            <ion-icon class="zmdi zmdi-chevron-down ion-text-end end"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+
+            <h3 class="d-flex end" [ngStyle]="{'color':getTipoCalle().errors && getTipoCalle().value !== '' ? 'var(--red_color)' : 'var(--bg-color)'}">
+              <ion-icon name="warning-outline"></ion-icon>
+              <div *ngIf="getTipoCalle().hasError('required')">
+                Este campo es requerido.
+              </div>
+            </h3>
+
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+                    <div class="input_box">
+                        <ion-label mode="md" position="stacked" *ngIf="getTipoCalle().value !== null">{{nombreTipo}}</ion-label>
+                        <ion-input mode="md" type="text" [placeholder]="nombreTipo" formControlName="calle" maxLength="10"></ion-input>
+                    </div>
+                </div>
+            </ion-item>
+
+            <h3 class="d-flex end" [ngStyle]="{'color':getCalle().errors && getCalle().touched ? 'var(--red_color)' : 'var(--bg-color)'}">
+              <ion-icon name="warning-outline"></ion-icon>
+              <div *ngIf="getCalle().hasError('required')">
+                Este campo es requerido.
+              </div>
+            </h3>
+
+            <div class="form store_timings">
+              <ion-row>
+                  <ion-col size="4">
+                      <ion-item lines="none">
+                          <div class="item_inner d-flex">
+                              <div class="input_box">
+                                  <ion-label mode="md" position="stacked" style="opacity: 1;">Numero</ion-label>
+                                  <ion-input mode="md" type="text" formControlName="numeroUno" maxLength="10"><span>#</span></ion-input>
+                              </div>
+                          </div>
+                      </ion-item>
+                  </ion-col>
+
+                  <ion-col size="4">
+                      <ion-item lines="none">
+                          <div class="item_inner d-flex">
+                              <div class="input_box">
+                                  <br>
+                                  <ion-input mode="md" type="text" formControlName="numeroDos" maxLength="5"><span>-</span></ion-input>
+                              </div>
+                          </div>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col size="1" lines="none">
+                    <ion-item lines="none">
+                      <div class="item_inner d-flex">
+                          <div>            
+                              <ion-checkbox (ionChange)="cambiarCheck($event)" formControlName="checkB"></ion-checkbox>
+                          </div>
+                      </div>
+                    </ion-item>
+                  </ion-col>
+    
+                  <ion-col size="3" lines="none">
+                    <ion-item lines="none">
+                      <div class="item_inner d-flex">
+                          <div>
+                              <br>                            
+                              <h6>No tengo número</h6>
+                          </div>
+                      </div>
+                    </ion-item>
+                  </ion-col>
+              </ion-row>
+            </div>
+
+            <h3 class="d-flex end" [ngStyle]="{'color':getNumeroUno().errors && getNumeroUno().touched || getNumeroDos().errors && getNumeroDos().touched ? 'var(--red_color)' : 'var(--bg-color)'}">              
+              <ion-icon *ngIf="getNumeroUno().hasError('required') || getNumeroDos().hasError('required')" name="warning-outline"></ion-icon>
+              <div *ngIf="getNumeroUno().hasError('required') || getNumeroDos().hasError('required')">
+                Este campo es requerido.
+              </div>
+            </h3>
+
+            <h3 class="d-flex end" *ngIf="getNumeroUno().disabled === true" style="padding: 0;">              
+              &nbsp;
+            </h3>
+
+            <h3 class="d-flex end" *ngIf="getNumeroUno().value !== '' && getNumeroDos().value !== '' && getNumeroUno().enabled === true" style="padding: 0;">              
+              &nbsp;
+            </h3>
+                        
+            <h6 class="text_detail">Referencias Adicionales</h6>
+            <ion-item lines="none">
+                <div class="item_inner d-flex">
+                    <div class="input_box">
+                        <ion-label mode="md" position="stacked">Descripcion</ion-label>
+                        <ion-input mode="md" type="text" placeholder="Descripcion" formControlName="descripcion" maxLength="25"></ion-input>
+                    </div>
+                </div>
+            </ion-item>
+        </div>
+    </ion-list>
+</form>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-button size="large" expand="full" (click)="Form.ngSubmit.emit()" class="btn">
+    <div *ngIf="state === 'crear' || state === 'crearPunto'">
+      Agregar
+    </div>
+    <div *ngIf="state === 'actualizar'">
+      Actualizar
+    </div>
+  </ion-button>
+</ion-footer>

@@ -1,0 +1,17 @@
+[
+    {
+        "icon": "assets/images/perfil_primary.png",
+        "name": "Usuarios",
+        "redirectTo": "/admin/lista-usuario-admin"
+    },
+    {
+        "icon": "assets/images/route_primary.png",
+        "name": "Rutas",
+        "redirectTo": "/admin/lista-ruta-admin"
+    },
+    {
+        "icon": "assets/images/logo_primary.png",
+        "name": "Puntos Recoleccion",
+        "redirectTo": "/admin/lista-recoleccion-admin"
+    }
+]

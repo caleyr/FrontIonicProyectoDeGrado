@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start" mode="md">
+          <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        <div class="title_inner d-flex">
+          Detalles
+        </div>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen scrollEvents="false">
+  <form [formGroup]="form" (ngSubmit)="guardarForm()" #Form="ngForm">
+    <ion-list lines="none">
+      <div class="form">
+        <ion-item lines="none">
+          <div class="item_inner d-flex">
+              <div class="input_box">
+                  <ion-label mode="md" position="stacked" style="opacity: 1;">Cantidad x kg</ion-label>
+                  <ion-input mode="md" type="text" inputmode="numeric" placeholder="Cantidad"formControlName="cantidad" maxLength="2"></ion-input>
+              </div>
+          </div>
+        </ion-item>
+
+        <h3 class="d-flex end" [ngStyle]="{'color':getCantidad().errors && getCantidad().touched ? 'var(--red_color)' : 'var(--bg-color)'}">
+          <ion-icon name="warning-outline"></ion-icon>
+          <div *ngIf="getCantidad().hasError('required')">
+            Este campo es requerido.
+          </div>
+        </h3>
+
+        <ion-item lines="none">
+          <div class="item_inner d-flex">
+              <div class="input_box">
+                  <ion-label mode="md" position="stacked">Descripcion</ion-label>
+                  <ion-textarea mode="md" placeholder="Agregar Descripcion" autoGrow="true" type="text" formControlName="descripcion" maxLength="25"></ion-textarea>
+              </div>
+          </div>
+        </ion-item>
+      </div>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer class="ion-no-border animate__animated animate__fadeInUp">
+  <ion-button size="large" expand="full" class="btn" (click)="Form.ngSubmit.emit()">Crear</ion-button>
+</ion-footer>

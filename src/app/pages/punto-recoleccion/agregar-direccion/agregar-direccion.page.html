@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/" color="primary"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-list *ngIf="listaDireccion?.length!==null">
+      <ion-item *ngFor="let lista of listaDireccion" lines="full" detail (click)="guardarDireccion(lista)" routerLink="/recoleccion/agregar-descripcion">
+        <ion-label>
+          <h2>{{lista.streetType + lista.career + " #" + lista.numberOne + "-" + lista.numberTwo}}</h2>
+          <h6>{{lista.description}}</h6>
+          <h6>{{"Facatativa, " + lista.neighborhood}}</h6>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-item detail routerLink="/usuarios/agregar-direccion">
+      <ion-label color="tertiary">
+        <h2>Agregar Domicilio</h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

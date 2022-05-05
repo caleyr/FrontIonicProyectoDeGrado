@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+      <div class="toolbar_inner d-flex">
+          <ion-buttons slot="start" mode="md">
+              <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+          </ion-buttons>
+          <ion-title>
+              <div class="title_inner">
+                  Notificaciones
+              </div>
+          </ion-title>
+      </div>
+      <ion-buttons slot="end">
+        <ion-button (click)="eliminarNotifiaciones()">
+          <ion-icon class="btaa" name="notifications-off"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list lines="none">
+    <ion-item *ngFor="let lista of listaComentario">
+      <div class="item_inner">
+          <h5 class="d-flex">
+            {{lista.date | date:'MMM d, y, h:mm a'}}
+          </h5>
+          <p>
+            {{lista.description}}
+          </p>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

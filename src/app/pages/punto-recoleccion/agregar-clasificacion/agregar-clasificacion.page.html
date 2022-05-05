@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/" color="primary"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-button (click)="setClasificacion('Plastico')" routerLink="/punto-recoleccion/agregar-direccion">Plastico</ion-button>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="setClasificacion('CartonYPapel')" routerLink="/punto-recoleccion/agregar-direccion">Carton y Papel</ion-button>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="setClasificacion('VidrioOMetal')" routerLink="/punto-recoleccion/agregar-direccion">Vidrio o Metales</ion-button>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="setClasificacion('Todos')" routerLink="/punto-recoleccion/agregar-direccion">todos</ion-button>
+  </ion-item>
+</ion-content>

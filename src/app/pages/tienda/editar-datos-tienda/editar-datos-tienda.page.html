@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Actualizar Perfil
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <form [formGroup]="form" (ngSubmit)="actualizarDatos()" #Form="ngForm">
+        <div class="form">
+            <ion-list lines="none">
+                <ion-item lines="none">
+                    <div class="item_inner d-flex">
+                        <div class="icon_box ion-text-start"><img src="assets/images/perfil_primary.png"></div>
+                        <div class="input_box">
+                            <ion-label mode="md" position="stacked">Nombre</ion-label>
+                            <ion-input mode="md" type="text" placeholder="Nombre" maxLength="15" formControlName="nombre"></ion-input>
+                        </div>
+                    </div>
+                </ion-item>
+                <p class="d-flex" [ngStyle]="{'color':getNombre().errors && getNombre().touched ? 'red' : 'var(--bg-color)'}">
+                    <br>
+                    <span *ngIf="getNombre().hasError('required')" class="end">  
+                        <ion-icon name="warning-outline"></ion-icon>
+                        Este campo es requerido.
+                    </span>
+                    <span *ngIf="getNombre().hasError('pattern')" class="end">  
+                        <ion-icon name="warning-outline"></ion-icon>
+                        Este campo no debe contener numeros.
+                    </span>
+                    <span *ngIf="getNombre().hasError('maxLength')" class="end">  
+                        <ion-icon name="warning-outline"></ion-icon>
+                        Te pasaste, máximo debe tener 15 caracteres.
+                    </span>
+                </p>
+      
+                <div class="item_inner">
+                  <ion-row>
+                      <ion-col size="6">
+                          <ion-item lines="none">
+                              <div class="item_inner d-flex error">
+                                <div class="icon_box ion-text-start"><img src="assets/images/document_primary.png"></div>
+                                  <div class="input_box">
+                                      <ion-label position="stacked">Documento</ion-label>
+                                      <ion-select placeholder="Tipo" formControlName="tipoDocumento">
+                                        <ion-select-option value="CC">C.C.</ion-select-option>
+                                        <ion-select-option value="NIT">N.I.T.</ion-select-option>
+                                      </ion-select>
+                                  </div>
+                              </div>
+                          </ion-item>
+                      </ion-col>
+      
+                      <ion-col size="6">
+                          <ion-item lines="none">
+                              <div class="item_inner d-flex">
+                                  <div class="input_box">
+                                    <br>
+                                    <ion-input mode="md" type="text" placeholder="Numero" inputmode="numeric" formControlName="numeroDocumento" maxLength="10"></ion-input>
+                                  </div>
+                              </div>
+                          </ion-item>                    
+                      </ion-col>
+                  </ion-row>                  
+                  <p class="d-flex error" [ngStyle]="{'color':getNumeroDocumento().errors && getNumeroDocumento().touched || getTipoDocumento().errors && getTipoDocumento().touched ? 'red' : 'var(--bg-color)'}">
+                    <br>
+                    <span *ngIf="getNumeroDocumento().hasError('pattern') && getTipoDocumento().value != ' ' && getNumeroDocumento().touched " class="end">  
+                        <ion-icon name="warning-outline"></ion-icon>
+                        Este campo solo es numerico.
+                    </span>
+                    <span *ngIf="getNumeroDocumento().hasError('required') && getTipoDocumento().value != ' ' && getNumeroDocumento().touched " class="end">  
+                        <ion-icon name="warning-outline"></ion-icon>
+                        El numero de documento es requerido.
+                    </span>
+                    <span *ngIf="getTipoDocumento().untouched && getNumeroDocumento().touched" class="end">  
+                        <ion-icon name="warning-outline"></ion-icon>
+                        El tipo de documento es requerido.
+                    </span>
+                  </p>
+              </div>          
+      
+              <ion-item lines="none">
+                <div class="item_inner d-flex">
+                    <div class="icon_box ion-text-start"><img src="assets/images/phone_primary.png"></div>
+                    <div class="input_box">
+                        <ion-label mode="md" position="stacked">Telefono</ion-label>
+                        <ion-input mode="md" placeholder="Télefono" type="text" inputmode="tel" formControlName="telefono" maxLength="10"></ion-input>
+                    </div>
+                </div>
+              </ion-item> 
+              <p class="d-flex" [ngStyle]="{'color':getTelefono().errors && getTelefono().touched ? 'red' : 'var(--bg-color)'}">
+                <br>
+                <span *ngIf="getTelefono().hasError('required')" class="end">  
+                    <ion-icon name="warning-outline"></ion-icon>
+                    Este campo es requerido.
+                </span>
+                <span *ngIf="getTelefono().hasError('pattern')" class="end">  
+                    <ion-icon name="warning-outline"></ion-icon>
+                    Este campo solo es numerico.
+                </span>
+              </p>                
+            </ion-list>
+            
+        </div>
+
+    </form>  
+</ion-content>
+<ion-footer>    
+    <ion-button size="large" expand="full" class="btn" (click)="Form.ngSubmit.emit()">Actualizar</ion-button>
+</ion-footer>

@@ -1,0 +1,23 @@
+<ion-content>
+  <div class="upper_div">
+    <div class="yellow_div"></div>
+  </div>
+
+  <div class="lower_div">
+    <form [formGroup]="credentials" (ngSubmit)="login()">
+      <ion-label class="head_lbl">Login</ion-label>
+
+      <ion-label class="small_lbl">Correo</ion-label>
+      <ion-input type="email" placeholder="Correo" inputmode="email" formControlName="email"></ion-input>
+      <ion-label class="small_lbl">Contraseña</ion-label>
+      <ion-input type="password" placeholder="Contraseña" inputmode="text" formControlName="password"></ion-input>
+      <ion-label class="forgot" (click)="lllamar()" routerLink="/usuarios/verificar-email">Has olvidado tu contraseña?</ion-label>
+
+      <ion-button expand="block" type="submit">
+        Ingresar
+      </ion-button>
+
+      <ion-label class="bottom_lbl">¿No tienes cuenta? <span class="signup_span" routerLink="/ver-registro" >Registrate</span></ion-label>
+    </form>
+  </div>
+</ion-content>
