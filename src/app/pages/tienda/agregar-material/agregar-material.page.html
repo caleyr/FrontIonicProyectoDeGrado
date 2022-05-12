@@ -23,8 +23,8 @@
                       <div class="input_box">
                           <ion-label mode="md" position="stacked">Tipo de Material</ion-label>
                           <div class="d-flex" style="align-items: flex-end;">
-                              <ion-select formControlName="tipoMaterial" placeholder="Seleccionar">
-                                  <ion-select-option *ngFor="let lista of listaMateriales" [value]="lista.material">{{lista.material}}</ion-select-option>
+                              <ion-select [(ngModel)]="material" [ngModelOptions]="{standalone: true}" placeholder="Seleccionar" (ngModelChange)="onChange($event)">
+                                  <ion-select-option *ngFor="let lista of listaMateriales" [value]="lista.value">{{lista.material}}</ion-select-option>
                               </ion-select>
                               
                               <ion-icon class="zmdi zmdi-chevron-down ion-text-end end"></ion-icon>
@@ -40,12 +40,12 @@
                 </div>
               </h3>
   
-              <div>
+              <div *ngIf="material === 'Otro'">
                 <ion-item lines="none" >
                     <div class="item_inner d-flex">
                         <div class="input_box">
                             <ion-label mode="md" position="stacked">Material</ion-label>
-                            <ion-input mode="md" type="text" [placeholder]="Material" formControlName="tipoMaterial" maxLength="10" [value]="material"></ion-input>
+                            <ion-input mode="md" type="text" formControlName="tipoMaterial" [placeholder]="Material" maxLength="10"></ion-input>
                         </div>
                     </div>
                 </ion-item>

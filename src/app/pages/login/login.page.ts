@@ -37,17 +37,30 @@ export class LoginPage implements OnInit {
 
   async login() {
     const loading = await this.loadingController.create();
-    await loading.present();    
-    this.apiService.login(this.credentials.value).subscribe(
-      async data => {        
-        await loading.dismiss();        
-        this.cargarRuta();  
-      },
-      async (res) => {        
+    await loading.present();
+    this.userService.verificarCorreoExistente(this.credentials.get('email').value).subscribe(async result=>{
+      if(result.status === 200){
+        const data = await this.apiService.verificarEstado(this.credentials.get('email').value).toPromise();
+        if(data.status === 200){
+          this.apiService.login(this.credentials.value).subscribe(
+            async data => {        
+              await loading.dismiss();        
+              this.cargarRuta();  
+            },
+            async (res) => {        
+              await loading.dismiss();
+              this.presentAlert();
+            }
+          );
+        }else{
+          await loading.dismiss();
+          this.presentAlertEstado();
+        }
+      }else{
         await loading.dismiss();
         this.presentAlert();
       }
-    );
+    });   
   }
 
   inicializarFormularioVacio() {
@@ -60,12 +73,26 @@ export class LoginPage implements OnInit {
   async presentAlert() {
     const alert = await this.alertController.create({
       cssClass:'my-custom-class',
-      message: 'Correo o contraseña incorrecta.',
+      mode : 'ios',
+      header: 'Correo o contraseña incorrecta.',
       buttons: ['OK']
     });
 
     await alert.present();
   }
+
+  async presentAlertEstado() {
+    const alert = await this.alertController.create({
+      cssClass:'my-custom-class',
+      mode : 'ios',
+      header: 'Usuario Inactivo',
+      message : 'Debes esperar hasta que verifiquen tus datos.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
 
   cargarRuta(){    
     this.appComponent.componentes = this.dataService.getMenuOpts();

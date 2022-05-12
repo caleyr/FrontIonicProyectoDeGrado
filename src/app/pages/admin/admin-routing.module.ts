@@ -19,6 +19,18 @@ const routes: Routes = [
   {
     path: 'lista-recoleccion-admin',
     loadChildren: () => import('./lista-recoleccion-admin/lista-recoleccion-admin.module').then( m => m.ListaRecoleccionAdminPageModule)
+  },
+  {
+    path: 'lista-sugerencias',
+    loadChildren: () => import('./lista-sugerencias/lista-sugerencias.module').then( m => m.ListaSugerenciasPageModule)
+  },
+  {
+    path: 'reporte-estadisticas',
+    loadChildren: () => import('./reporte-estadisticas/reporte-estadisticas.module').then( m => m.ReporteEstadisticasPageModule)
+  },
+  {
+    path: 'usuarios-pendientes',
+    loadChildren: () => import('./usuarios-pendientes/usuarios-pendientes.module').then( m => m.UsuariosPendientesPageModule)
   }
 ];
 

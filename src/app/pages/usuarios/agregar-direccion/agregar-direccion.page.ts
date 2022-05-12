@@ -77,7 +77,7 @@ export class AgregarDireccionPage implements OnInit {
       numeroUno: [ '', [Validators.required, Validators.maxLength(10)]],
       checkB: [ false, [Validators.required]],
       numeroDos: ['', [Validators.required, Validators.maxLength(5)]],     
-      descripcion: ['', [Validators.maxLength(100)]],
+      descripcion: ['', [Validators.required ,Validators.maxLength(100)]],
     });
     this.form.valueChanges.subscribe(value => {
       if(value.tipoCalle !== ''){
@@ -95,7 +95,7 @@ export class AgregarDireccionPage implements OnInit {
       numeroUno: [ this.direccion.numberOne , [Validators.required, Validators.maxLength(10)]],
       checkB: [ false, [Validators.required]],
       numeroDos: [ this.direccion.numberTwo, [Validators.required, Validators.maxLength(5)]],     
-      descripcion: [this.direccion.description , [Validators.maxLength(100)]],
+      descripcion: [this.direccion.description , [Validators.required, Validators.maxLength(100)]],
     });
 
     if(this.direccion.numberOne === null && this.direccion.numberTwo === null){
@@ -214,4 +214,9 @@ export class AgregarDireccionPage implements OnInit {
   getCheck(){
     return this.form.get('numeroDos');
   }
+
+  getDescripcion(){
+    return this.form.get('descripcion');
+  }
+
 }

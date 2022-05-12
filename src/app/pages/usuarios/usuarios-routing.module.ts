@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'verificar-email',
     loadChildren: () => import('./verificar-email/verificar-email.module').then( m => m.VerificarEmailPageModule)
+  },
+  {
+    path: 'enviar-sugerencia',
+    loadChildren: () => import('./enviar-sugerencia/enviar-sugerencia.module').then( m => m.EnviarSugerenciaPageModule)
   }
 ];
 

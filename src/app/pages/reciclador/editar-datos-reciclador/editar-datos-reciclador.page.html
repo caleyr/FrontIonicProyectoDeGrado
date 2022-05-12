@@ -18,7 +18,7 @@
                       <div class="icon_box ion-text-start"><img src="assets/images/perfil_primary.png"></div>
                       <div class="input_box">
                           <ion-label mode="md" position="stacked">Nombre</ion-label>
-                          <ion-input mode="md" type="text" inputmode="text" placeholder="Nombre" maxLength="15" formControlName="nombre"></ion-input>
+                          <ion-input mode="md" type="text" inputmode="text" placeholder="Nombre" maxLength="25" formControlName="nombre"></ion-input>
                       </div>
                   </div>
               </ion-item>
@@ -40,7 +40,7 @@
                           <div class="icon_box ion-text-start"><img src="assets/images/perfil_primary.png"></div>
                           <div class="input_box">
                               <ion-label mode="md" position="stacked">Apellido</ion-label>
-                              <ion-input mode="md" type="text" inputmode="text" placeholder="Apellido" maxLength="15" formControlName="apellido"></ion-input>
+                              <ion-input mode="md" type="text" inputmode="text" placeholder="Apellido" maxLength="25" formControlName="apellido"></ion-input>
                           </div>
                       </div>
                     </ion-item> 
@@ -55,28 +55,7 @@
                             Te pasaste, máximo debe tener 15 caracteres.
                         </span>
                     </p>
-              </div>
-
-              <ion-item lines="none">
-                <div class="item_inner d-flex">
-                    <div class="icon_box ion-text-start"><img src="assets/images/document_primary.png"></div>
-                    <div class="input_box">
-                        <ion-label mode="md" position="stacked">Documento</ion-label>
-                        <ion-input mode="md" type="text" placeholder="Documento" inputmode="numeric" formControlName="numeroDocumento" maxLength="10"></ion-input>
-                    </div>
-                </div>
-              </ion-item>
-              <p class="d-flex" [ngStyle]="{'color':getNumeroDocumento().errors && getNumeroDocumento().touched ? 'red' : 'var(--bg-color)'}">
-                  <br>
-                  <span *ngIf="getNumeroDocumento().hasError('required')" class="end">  
-                      <ion-icon name="warning-outline"></ion-icon>
-                      Este campo es requerido.
-                  </span>
-                  <span *ngIf="getNumeroDocumento().hasError('pattern')" class="end">  
-                      <ion-icon name="warning-outline"></ion-icon>
-                      Este campo solo es numerico.
-                  </span>
-              </p>
+              </div>              
     
             <ion-item lines="none">
               <div class="item_inner d-flex">

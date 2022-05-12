@@ -15,6 +15,7 @@ import { Order } from 'src/app/model/Order';
 import { Historial } from '../model/Historial';
 import { HttpService } from './http.service';
 import { Image } from '../model/Image';
+import { EmailValidator } from '@angular/forms';
 
 
 @Injectable({
@@ -73,8 +74,12 @@ export class UserService {
     return this.htt.doGet(`${this.urlUser}/${idUsuario}`);
   }
 
-  cambiarEstado(user : User){
-    return this.htt.doPut(`${this.urlUser}/${user.id}`, user);
+  cambiarEstado(email : string, estado : boolean){
+    return this.htt.doPutEstado(`${this.urlUser}/Activate/${email}/${estado}`).pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    )
   }
 
   verificarCorreo(email : string, code : string){
@@ -260,8 +265,17 @@ export class UserService {
     )
   }
 
-  actualizarMaterial(idTienda : number, material : Order) : Observable<any>{
-    return this.htt.doPut(`${this.urlMaterial}/${idTienda}`, material)
+  actualizarMaterial(id : number, material : Order) : Observable<any>{
+    return this.htt.doPut(`${this.urlMaterial}/${id}`, material)
+    .pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    )
+  }
+
+  eliminarMaterial(id: number) : Observable<any>{
+    return this.htt.doDelete(`${this.urlMaterial}/${id}`)
     .pipe(
       tap(() => {
         this._refresh$.next();

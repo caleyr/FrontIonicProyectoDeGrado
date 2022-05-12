@@ -62,7 +62,7 @@
             <div class="text_box">
                 <h3>Fecha</h3>
                 <div class="buttons d-flex">
-                    <h5>02-09-2011</h5>
+                    <h5>{{punto.createDate | date:'MMM d, y, h:mm a'}}</h5>
                 </div>
             </div>
         </div>
@@ -83,7 +83,8 @@
             <ion-item>              
               <div class="item_inner">
                 <div class="text_box">               
-                  <h3>{{direccion.streetType}} {{direccion.career}} #{{direccion.numberOne}}-{{direccion.numberTwo}}</h3>
+                  <h3 *ngIf="direccion.numberOne !== null">{{direccion.streetType + ' ' + direccion.career + ' #' + direccion.numberOne + ' - ' + direccion.numberTwo}}</h3>
+                  <h3 *ngIf="direccion.numberOne === null">{{direccion.streetType + ' ' + direccion.career}}</h3>
                   <h3>{{direccion.description}}</h3>
                   <h3>Facatativá , {{direccion.neighborhood}}</h3>
                 </div>

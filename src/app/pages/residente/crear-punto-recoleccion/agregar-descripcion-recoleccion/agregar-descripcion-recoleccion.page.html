@@ -24,13 +24,6 @@
           </div>
         </ion-item>
 
-        <h3 class="d-flex end" [ngStyle]="{'color':getCantidad().errors && getCantidad().touched ? 'var(--red_color)' : 'var(--bg-color)'}">
-          <ion-icon name="warning-outline"></ion-icon>
-          <div *ngIf="getCantidad().hasError('required')">
-            Este campo es requerido.
-          </div>
-        </h3>
-
         <ion-item lines="none">
           <div class="item_inner d-flex">
               <div class="input_box">
@@ -39,6 +32,13 @@
               </div>
           </div>
         </ion-item>
+
+        <h3 class="d-flex end" [ngStyle]="{'color':getDescripcion().errors && getDescripcion().touched ? 'var(--red_color)' : 'var(--bg-color)'}">
+          <ion-icon name="warning-outline"></ion-icon>
+          <div *ngIf="getDescripcion().hasError('required')">
+            Este campo es requerido.
+          </div>
+        </h3>
       </div>
     </ion-list>
   </form>

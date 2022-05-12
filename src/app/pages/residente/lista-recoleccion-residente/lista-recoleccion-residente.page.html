@@ -4,10 +4,6 @@
           Historial
       </ion-title>
   </ion-toolbar>
-  <div class="search_box">
-      <ion-icon class="zmdi zmdi-search ion-text-start"></ion-icon>
-      <ion-searchbar class="ion-no-padding" searchIcon="hide" placeholder="Buscar Material"></ion-searchbar>
-  </div>
   <ion-segment (ionChange)="segmentoCambiado()" [(ngModel)]="segment">
     <ion-segment-button mode="ios" value="0">
         <ion-label>Espera</ion-label>
@@ -17,9 +13,9 @@
     </ion-segment-button>
     <ion-segment-button mode="ios" value="2">
       <ion-label>Finalizado</ion-label>
-  </ion-segment-button>
+  </ion-segment-button> 
   </ion-segment>
-</ion-header>
+</ion-header> 
 
 <ion-content class="bg_color" fullscreen>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">

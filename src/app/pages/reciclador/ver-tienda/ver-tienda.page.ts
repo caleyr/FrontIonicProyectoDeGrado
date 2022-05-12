@@ -70,7 +70,7 @@ export class VerTiendaPage implements AfterViewInit {
       let marker = new google.maps.Marker({
         position: origen,
         map: this.map,
-      title: 'Tu'
+        icon : "assets/images/map/market_shop.png",
       });
       marker.addListener("click", () => {
         this.map.setZoom(17);

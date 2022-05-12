@@ -51,6 +51,14 @@ export class HttpService {
     return from(Http.put(options))
   }
 
+  doPutEstado(url){
+    const options : HttpOptions = {
+      url,
+      headers: { 'Content-Type': 'application/json'},
+    }
+    return from(Http.put(options))
+  }
+
   doPutImg(url, par){
     const options : HttpOptions = {
       url,

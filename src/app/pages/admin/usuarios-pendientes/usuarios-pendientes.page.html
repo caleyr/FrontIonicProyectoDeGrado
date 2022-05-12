@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">          
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+          Usuarios por Verificar
+      </ion-title>
+  </ion-toolbar>
+  <ion-segment (ionChange)="segmentoCambiado()" [(ngModel)]="segment">
+    <ion-segment-button mode="ios" value="0">
+        <ion-label>Reciclador</ion-label>
+    </ion-segment-button>
+    <ion-segment-button mode="ios" value="1">
+        <ion-label>Tienda</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="tab_content">
+    <ion-slides #slides (ionSlideDidChange)="sliderCambiado()">
+      <ion-slide>
+        <ion-list>
+          <ion-item *ngFor="let lista of listaUsuarioReciclador" [routerLink]= "['/admin/lista-usuario-admin/ver-usuario-admin/',lista.role, lista.email, lista.id]">
+            <div class="item_inner d-flex"> 
+              <div class="img_box center_img">            
+                <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" class="crop_img">
+              </div>
+              <div class="text_box">
+                <h3>
+                  {{lista.email}}
+                </h3>
+                <h4 class="d-flex" *ngIf="lista.role === 'Reciclador'">{{lista.role}}</h4>
+              </div>
+              <ion-note slot="end" >
+                <ion-label>
+                  <ion-label *ngIf="lista.state==true" color="primary" >
+                    <h3>Activo</h3>
+                  </ion-label>
+                  <ion-label *ngIf="lista.state==false" color="danger">
+                    <h3>Inactivo</h3>
+                  </ion-label>
+                </ion-label>
+              </ion-note>
+            </div>               
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+      <ion-slide>
+        <ion-list>
+          <ion-item *ngFor="let lista of listaUsuarioTienda" [routerLink]= "['/admin/lista-usuario-admin/ver-usuario-admin/',lista.role, lista.email, lista.id]">
+            <div class="item_inner d-flex"> 
+              <div class="img_box center_img">            
+                <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" class="crop_img">
+              </div>
+              <div class="text_box">
+                <h3>
+                  {{lista.email}}
+                </h3>
+                <h4 class="d-flex" *ngIf="lista.role === 'isShop'">Tienda</h4>
+              </div>
+              <ion-note slot="end" >
+                <ion-label>
+                  <ion-label *ngIf="lista.state==true" color="primary" >
+                    <h3>Activo</h3>
+                  </ion-label>
+                  <ion-label *ngIf="lista.state==false" color="danger">
+                    <h3>Inactivo</h3>
+                  </ion-label>
+                </ion-label>
+              </ion-note>
+            </div>               
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>

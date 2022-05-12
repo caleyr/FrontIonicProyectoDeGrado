@@ -37,21 +37,18 @@ export class EditarDatosRecicladorPage implements OnInit {
     this.form = this.formBuilder.group({
       nombre: [this.reciclador.name, [Validators.required]],
       apellido: [this.reciclador.lastName, [Validators.required]],
-      telefono: [this.reciclador.phone, [Validators.required, Validators.pattern('[0-9]*')]],
-      numeroDocumento: [this.reciclador.document, [Validators.required, Validators.pattern('[0-9]*')]],
+      telefono: [this.reciclador.phone, [Validators.required, Validators.pattern('[0-9]*')]]
     });    
   }
 
   async actualizarDatos() {
-    console.log(this.form.valid);
-    console.log(this.form.value);
     if(this.form.valid == true){
       let reciclador = new Recycler();
         reciclador.name = this.getNombre().value;
         reciclador.lastName = this.getApellido().value;
         reciclador.phone = this.getTelefono().value;
         reciclador.documentType = 'CC';
-        reciclador.document = this.getNumeroDocumento().value;
+        reciclador.document = this.reciclador.document;
         this.userService.updateResycler(reciclador, this.id).subscribe(
           async _ => {       
             console.log("Usuario Actualizado");  
@@ -99,10 +96,6 @@ export class EditarDatosRecicladorPage implements OnInit {
 
   getApellido(){
     return this.form.get('apellido');
-  }
-
-  getNumeroDocumento(){
-    return this.form.get('numeroDocumento');
   }
 
   getTelefono(){

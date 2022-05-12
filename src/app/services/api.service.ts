@@ -18,6 +18,7 @@ const NOTIFICATION = 'notify';
 export class ApiService {
 
   private url : string = `https://recifacappapi.azurewebsites.net/api/accounts`;
+  private urlUser : string = `https://recifacappapi.azurewebsites.net/api/users`;
 
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   currentAccessToken = null;
@@ -187,6 +188,10 @@ export class ApiService {
         this.isAuthenticated.next(true);
       })
     )*/
+  }
+
+  verificarEstado(email : string){
+    return this.httpService.doGet(`${this.urlUser}/VerifyState/${email}`)
   }
 
   getNewAccessToken() {    

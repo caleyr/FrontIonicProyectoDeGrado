@@ -47,6 +47,10 @@ const routes: Routes = [
   {
     path: 'ver-comentario-reciclador',
     loadChildren: () => import('./ver-comentario-reciclador/ver-comentario-reciclador.module').then( m => m.VerComentarioRecicladorPageModule)
+  },
+  {
+    path: 'historial-rutas',
+    loadChildren: () => import('./historial-rutas/historial-rutas.module').then( m => m.HistorialRutasPageModule)
   }
 ];
 

@@ -29,8 +29,8 @@ export class AgregarDescripcionRecoleccionPage implements OnInit {
 
   inicializarFormularioVacio() {
     this.form = this.formBuilder.group({
-      cantidad: ['', [Validators.required, Validators.maxLength(2)]],     
-      descripcion: ['', [Validators.maxLength(100)]],
+      cantidad: [0, [Validators.maxLength(2)]],     
+      descripcion: ['', [Validators.required]],
     });
   }
 
@@ -57,6 +57,7 @@ export class AgregarDescripcionRecoleccionPage implements OnInit {
     this.presentAlert('Reciclaje Publicado');
   }
 
+
   cambiarPunto(number : number){
     const Numeroaletra = String(number);
     const Buscarpunto = Numeroaletra.indexOf('.');
@@ -71,7 +72,7 @@ export class AgregarDescripcionRecoleccionPage implements OnInit {
       header: mensaje,
       backdropDismiss: false,
       buttons: [
-        {
+        { 
           text: 'OK',
           handler: (blah) => {            
             this.router.navigateByUrl('/tabs-residente/ver-historial', { replaceUrl: true });

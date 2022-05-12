@@ -6,8 +6,9 @@ import { User } from '../../../../model/User';
 import { Address } from '../../../../model/Address';
 import { UserService } from '../../../../services/user.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ToastController, AlertController } from '@ionic/angular';
+import { ToastController, AlertController, NavController } from '@ionic/angular';
 import { Order } from '../../../../model/Order';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-ver-usuario-admin',
@@ -22,6 +23,7 @@ export class VerUsuarioAdminPage implements OnInit {
 
   user: User = new User;  
   estado : boolean;
+  estadoCambio : boolean;
   listaDireccion: Address[] = [];
   listaMateriales: Order[] = [];
 
@@ -33,6 +35,7 @@ export class VerUsuarioAdminPage implements OnInit {
     private usuarioService: UserService,
     private route: ActivatedRoute,
     private router: Router,
+    private NavController : NavController,
     public toastController: ToastController,
     private alertController: AlertController) {
   }
@@ -63,7 +66,9 @@ export class VerUsuarioAdminPage implements OnInit {
     }else if(this.rol == "isShop"){
       this.usuarioService.obtenerInfoTienda(this.email).subscribe(results =>{
         this.tienda = results.data;
-        this.listaDireccion[0] = results.data.address;
+        if(results.data.address !== null){
+          this.listaDireccion = results.data.address;
+        }
         this.listaMateriales = results.data.orderList;
         console.log(results);
       });
@@ -79,23 +84,28 @@ export class VerUsuarioAdminPage implements OnInit {
   async presentAlert() {
     const alert = await this.alertController.create({
       cssClass:'my-custom-class',
-      message: 'Desea cambiar el estado.',
+      header: 'Desea cambiar el estado.',
+      mode: 'ios',
+      backdropDismiss: false,
       buttons: [
         {
           text: 'Cancelar',
           handler: () => {
+            if(this.user.state !== true){
+              this.user.state = true;
+            }else{
+              this.user.state = false;
+            }
           }
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.usuarioService.cambiarEstado(this.user).subscribe(
+            this.usuarioService.cambiarEstado(this.user.email, this.user.state).subscribe(
               result => {
-                console.log(result);                
-                this.presentToast();            
-                this.router.navigateByUrl('/admin/lista-usuario-admin', { replaceUrl: true });
-              },
-              error => {
-                console.log(error);                  
+                if(result.status === 200){          
+                  this.presentToast();
+                  this.NavController.back();
+                }
             });
           }
         }

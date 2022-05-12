@@ -83,6 +83,10 @@ export class PuntoRecoleccionService {
     return this.http.doGet(`${this.urlPunto}/GetByState/${pagina}/${cantidad}/${estado}`);
   }
 
+  listaDate(tiempo : string){
+    return this.http.doGet(`${this.urlPunto}/${tiempo}`);
+  }
+
   listaPaginadaResidente(pagina : number, cantidad : number, id : number, estado : string){
     return this.http.doGet(`${this.urlPunto}/GetByIdResident/${pagina}/${cantidad}/${id}/${estado}`);
   }

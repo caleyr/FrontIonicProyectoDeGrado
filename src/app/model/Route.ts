@@ -9,4 +9,5 @@ export class Route{
     recycler : number;
     listaRecycler : User;
     collectionPoints : CollectionPoint[];
+    user : User;
 }

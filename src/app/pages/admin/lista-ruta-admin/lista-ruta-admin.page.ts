@@ -19,10 +19,10 @@ export class ListaRutaAdminPage implements OnInit {
     private rutaService : RutaService,
     private userService : UserService
     ) {      
-      this.listar();
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.listar();
   }
 
   listar() {
@@ -33,11 +33,13 @@ export class ListaRutaAdminPage implements OnInit {
   }
 
   cargarUsuario(){
-    this.listaRuta.forEach(element => {
-      this.userService.obtenerReciclador(element.recycler).subscribe(data=>{
-        element.listaRecycler = data.data.user;
+    for (let index = 0; index < this.listaRuta.length; index++) {
+      this.userService.obtenerReciclador(this.listaRuta[index].recycler).subscribe(data=>{
+        if(data.status === 200){
+          this.listaRuta[index].user = data.data.user;
+        }
       });
-    });    
+    }
   }
 
   doRefresh(event){

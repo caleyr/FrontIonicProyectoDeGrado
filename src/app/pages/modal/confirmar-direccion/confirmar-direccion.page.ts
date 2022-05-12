@@ -76,6 +76,7 @@ export class ConfirmarDireccionPage implements AfterViewInit {
           map: this.map,
           animation: google.maps.Animation.DROP,
           draggable: false,
+          icon : "assets/images/map/market_user.png"
     });
     this.clickHandleEvent();
     this.infowindow = new google.maps.InfoWindow();

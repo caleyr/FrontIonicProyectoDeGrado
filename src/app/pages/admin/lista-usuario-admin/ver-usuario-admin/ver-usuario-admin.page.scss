@@ -1,20 +1,6 @@
 ion-header {
     background: var(--white);
 
-    ion-toolbar {
-        ion-title {
-            padding: 0 20px !important;
-
-            ion-icon {
-                font-size: 2.1rem;
-                position: relative;
-                top: 12px;
-                display: none;
-            }
-        }
-
-    }
-
     .title_inner {
         .toggle_box {
             display: flex;
@@ -38,12 +24,6 @@ ion-header {
                 --handle-box-shadow: none;
                 height: 19px;
                 width: 34px;
-            }
-
-            &.in_stock {
-                span {
-                    color: var(--primary);
-                }
             }
         }
     }

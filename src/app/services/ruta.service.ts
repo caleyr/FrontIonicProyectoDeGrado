@@ -20,6 +20,10 @@ export class RutaService {
     return this.http.doGet(`${this.urlRoute}/${page}/${size}`);
   }
 
+  obtenerListaTiempo(tiempo : String){
+    return this.http.doGet(`${this.urlRoute}/${tiempo}`);
+  }
+
   obtenerRuta(id : number){
     return this.http.doGet(`${this.urlRoute}/${id}`);
   }

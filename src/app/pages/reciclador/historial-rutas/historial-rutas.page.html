@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start" mode="md">
+        <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        <div class="title_inner d-flex">
+          <span class="offline">Historial</span>
+        </div>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <h2>{{listaRuta.length}} Rutas</h2>
+    <ion-item *ngFor="let lista of listaRuta">
+      <div class="item_inner">          
+          <div class="d-flex item_info">
+              <div class="address_info">
+                  <div class="from_to d-flex">
+                      <div class="icon_box d-flex">
+                          <ion-icon class="zmdi zmdi-pin"></ion-icon>
+                      </div>
+                  </div>
+                  <div class="dotted_icon">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                  </div>
+                  <div class="from_to d-flex">
+                      <div class="icon_box d-flex">
+                          <ion-icon class="zmdi zmdi-navigation"></ion-icon>
+                      </div>
+                  </div>
+              </div>
+              <div class="item_info d-flex">
+                <div class="item_details">
+                  <h3 class="d-flex">
+                      Material
+                      <span class="end order_status">
+                        <div>
+                          {{lista.endDate | date:'MMM d, y, h:mm a' }}
+                        </div>
+                      </span>
+                  </h3>
+                  <h4 class="d-flex">{{lista.startDate | date:'MMM d, y, h:mm a'}}</h4>
+                </div> 
+              </div>                         
+          </div>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

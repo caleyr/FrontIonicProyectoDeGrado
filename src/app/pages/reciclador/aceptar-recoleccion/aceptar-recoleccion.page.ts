@@ -34,7 +34,7 @@ export class AceptarRecoleccionPage implements AfterViewInit, OnInit{
   @ViewChild('mapAceptar') divMap: ElementRef;
   
   directionsService = new google.maps.DirectionsService();
-  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay;
 
   destino: CollectionPoint = null;
 
@@ -52,7 +52,7 @@ export class AceptarRecoleccionPage implements AfterViewInit, OnInit{
         featureType : "poi.business", 
         stylers : [ 
           { visibility : "off" } 
-        ] 
+        ]
       } 
     ]
   }
@@ -61,7 +61,9 @@ export class AceptarRecoleccionPage implements AfterViewInit, OnInit{
   ruta = 
   {
     comment : {
-      description : "Ruta Creada"
+      description : "Ruta Creada",
+      date : "2022-05-06T11:30:59.844Z",
+      userId: 0
     },
     recycler: 0
   }
@@ -129,13 +131,7 @@ export class AceptarRecoleccionPage implements AfterViewInit, OnInit{
   }
 
   loadRoute(){
-    this.map = new google.maps.Map(this.divMap.nativeElement, this.mapOptions);      
-    this.directionsDisplay.setMap(this.map);
-    this.directionsDisplay.setOptions({
-      polylineOptions: {
-        strokeColor: '#5ecca8'
-      }
-    });
+    this.map = new google.maps.Map(this.divMap.nativeElement, this.mapOptions);
     this.calculateRoute();
   }
 
@@ -151,8 +147,20 @@ export class AceptarRecoleccionPage implements AfterViewInit, OnInit{
         travelMode: google.maps.TravelMode.WALKING,
       }, async ( response, status)  => {
         if (status === google.maps.DirectionsStatus.OK) {
-          this.directionsDisplay.setDirections(response);
+          this.directionsDisplay = new google.maps.DirectionsRenderer({
+            map: this.map,
+            directions: response,
+            suppressMarkers: true,
+            polylineOptions: {
+              strokeColor: '#5ecca8',
+              strokeWeight: 5
+            }
+          });
           route = await response.routes[0];
+          this.makeMarker( this.puntoRecoleccionService.origin, "assets/images/map/market_user.png" );
+          for (let index = 0; index < this.wayPoints.length; index++) {
+            this.makeMarker(this.wayPoints[index].location , "assets/images/map/market_recycler.png");            
+          }
           route.legs.forEach(function (leg) {
             duration += leg.duration.value/60;
             distance += leg.distance.value/1000;
@@ -166,12 +174,19 @@ export class AceptarRecoleccionPage implements AfterViewInit, OnInit{
     });
   }
 
+  makeMarker( position, icon ) {
+    new google.maps.Marker({
+     position: position,
+     map: this.map,
+     icon: icon
+    });
+  }
+
   cargarDestino(){
     let max = this.puntoRecoleccionService.listaRecoleccion.length - 1;
     this.puntoRecoleccionService.destino.lat = this.puntoRecoleccionService.listaRecoleccion[max].address.latitude;
     this.puntoRecoleccionService.destino.lng = this.puntoRecoleccionService.listaRecoleccion[max].address.longitude;
     this.destino = this.puntoRecoleccionService.listaRecoleccion[max];
-    console.log(JSON.stringify(this.destino));    
   }
 
   cargarReciclador(){
@@ -198,7 +213,7 @@ export class AceptarRecoleccionPage implements AfterViewInit, OnInit{
     const alert = await this.alertController.create({
       cssClass:'my-custom-class',
       message: 'Aceptar la ruta.',
-      mode: 'md',
+      mode: 'ios',
       buttons: [
         {
           text: 'Cancelar',
@@ -259,20 +274,23 @@ export class AceptarRecoleccionPage implements AfterViewInit, OnInit{
   async forActualizar(data){
     for (let index = 0; index < this.puntoRecoleccionService.listaRecoleccion.length; index++) {
       const i = index + 1;
-      const punto = await this.actualizar(data, this.puntoRecoleccionService.listaRecoleccion[index]);
-      const datos = await this.puntoRecoleccionService.actualizarPunto(punto, 'Espera').toPromise();
-      if(datos.status !== 200){                   
+      const datosA = await this.actualizar(data, this.puntoRecoleccionService.listaRecoleccion[index]);
+      console.log('DATOSSSSA'+JSON.stringify(datosA));
+      
+      const datosAB = await this.puntoRecoleccionService.actualizarPunto(datosA, 'Espera').toPromise();
+      console.log('DATOSSSSAbbb '+datosAB.status);
+      if(datosAB.status !== 200){                   
         this.pasa = false;          
         const fin = await this.rutaService.eliminarRuta(data.data.id).toPromise();
         if(fin){
           this.mensajeError();
         }
-      }else if(datos.status === 200){
+      }else if(datosAB.status === 200){
         this.crearComentario(this.puntoRecoleccionService.listaRecoleccion[index].resident);
         if(i === this.puntoRecoleccionService.listaRecoleccion.length && this.pasa === true){
           this.navCtrl.navigateForward('/reciclador/continuar-recoleccion', { animated: false });
         }
-      }      
+      }  
     }
   }
 

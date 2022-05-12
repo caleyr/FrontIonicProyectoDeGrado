@@ -25,7 +25,13 @@ export class ContinuarRecoleccionPage implements OnInit, AfterViewInit {
   map : any;
   @ViewChild('mapVerificar') divMap: ElementRef;
   directionsService = new google.maps.DirectionsService();
-  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay = new google.maps.DirectionsRenderer({
+    suppressMarkers: true,
+    polylineOptions: {
+      strokeColor: '#5ecca8',
+      strokeWeight: 5
+    }
+  });;
 
   destino: CollectionPoint = new CollectionPoint();
 
@@ -68,6 +74,14 @@ export class ContinuarRecoleccionPage implements OnInit, AfterViewInit {
     description : 'Punto de recoleccion finalizado.',
     userId : null
   }
+
+  markerOri = new google.maps.Marker({
+    icon: "assets/images/map/market_user.png"
+  });
+  markerDest = new google.maps.Marker({
+    icon: "assets/images/map/market_recycler.png"
+  });
+
 
 
   constructor(
@@ -143,7 +157,9 @@ export class ContinuarRecoleccionPage implements OnInit, AfterViewInit {
 
 
   async calculateRouteNormal() {    
-    this.watch = this.directionsDisplay.setMap(this.map);
+    this.watch = this.directionsDisplay.setMap(this.map);    
+    this.markerDest.setMap(this.map);
+    this.markerOri.setMap(this.map);
     Geolocation.watchPosition({
       enableHighAccuracy: true, timeout: 6000, maximumAge: Infinity
     },async position =>{        
@@ -157,8 +173,10 @@ export class ContinuarRecoleccionPage implements OnInit, AfterViewInit {
     });
   }
 
-  async calculateRoute() {    
-    this.directionsDisplay.setMap(this.map);
+  async calculateRoute() {
+    this.directionsDisplay.setMap(this.map);    
+    this.markerDest.setMap(this.map);
+    this.markerOri.setMap(this.map);
     navigator.geolocation.watchPosition(async position =>{        
       this.puntoRecoleccionService.origin = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);        
       await this.asignarRecorrido();
@@ -179,13 +197,10 @@ export class ContinuarRecoleccionPage implements OnInit, AfterViewInit {
     }, async ( response, status)  => {
       if (status === google.maps.DirectionsStatus.OK) {
         this.tiempo = 6000;
-        console.log(
-          'Entro' + this.tiempo
-        );
-        
         this.directionsDisplay.setDirections(response);
         route = await response.routes[0];
-        
+        this.markerOri.setPosition(this.puntoRecoleccionService.origin);
+        this.markerDest.setPosition(this.puntoRecoleccionService.destino);        
         route.legs.forEach(function (leg) {
           duration += leg.duration.value/60;
           distance += leg.distance.value/1000;
@@ -203,6 +218,10 @@ export class ContinuarRecoleccionPage implements OnInit, AfterViewInit {
         console.log('Fallo ' + this.tiempo);       
       }
     });
+  }
+
+  makeMarker( position, icon ) {
+    
   }
 
 

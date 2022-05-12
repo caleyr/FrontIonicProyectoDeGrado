@@ -140,14 +140,15 @@
       </ion-item>
     </div>
     
-    <div *ngIf="listaDireccion?.length!==0">
+    <div *ngIf="listaDireccion.length !== 0">
       <h1>Direcciones</h1>
       <ion-list>
         <div class="item_list">
             <ion-item *ngFor="let listaD of listaDireccion" >
               <div class="item_inner">
-                  <div class="text_box">               
-                    <h3>{{listaD.streetType + ' ' + listaD.career + ' #' + listaD.numberOne + ' - ' + listaD.numberTwo}}</h3>
+                  <div class="text_box">
+                    <h3 *ngIf="listaD.numberOne !== null">{{listaD.streetType + ' ' + listaD.career + ' #' + listaD.numberOne + ' - ' + listaD.numberTwo}}</h3>
+                    <h3 *ngIf="listaD.numberOne === null">{{listaD.streetType + ' ' + listaD.career}}</h3>
                     <h3>{{listaD.description}}</h3>
                     <h3>Facatativá , {{listaD.neighborhood}}</h3>
                   </div>

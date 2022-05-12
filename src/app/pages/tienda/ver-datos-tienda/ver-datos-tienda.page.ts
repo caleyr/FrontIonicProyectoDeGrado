@@ -80,13 +80,13 @@ export class VerDatosTiendaPage implements OnInit {
     await popover.present();
   }
 
-  async presentPopoverMaterial(event) {
+  async presentPopoverMaterial(event, id : number) {
     const popover = await this.popoverController.create({
       component: OpcionesMaterialPage,
       event: event,
       mode: 'ios',
       componentProps:{           
-        id : this.tienda.id,
+        id : id,
       }
     });
     await popover.present();

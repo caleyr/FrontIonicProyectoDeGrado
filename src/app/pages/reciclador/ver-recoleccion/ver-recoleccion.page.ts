@@ -28,7 +28,7 @@ export class VerRecoleccionPage implements OnInit ,AfterViewInit {
   listaNueva : CollectionPoint[] = [];
 
   map : any;
-  marker : any;
+  marker;
   @ViewChild('mapVer') divMap: ElementRef;
 
   ubicacion : string;
@@ -38,7 +38,15 @@ export class VerRecoleccionPage implements OnInit ,AfterViewInit {
     center: {lat: 4.815683 ,lng: -74.353531},    
     zoom: 17,
     disableDefaultUI: true,
-    clickableIcons: false
+    clickableIcons: false,
+    styles: [ 
+      { 
+        featureType : "poi.business", 
+        stylers : [ 
+          { visibility : "off" } 
+        ] 
+      } 
+    ]
   };
 
   destino = { lat: 0, lng: 0 }; 
@@ -97,8 +105,9 @@ export class VerRecoleccionPage implements OnInit ,AfterViewInit {
       this.mapOptions.center.lng = position.coords.longitude;      
       if(this.marker === undefined){
         this.marker = new google.maps.Marker({
-          position: this.mapOptions.center,
-          map: this.map,
+          position: this.mapOptions.center, 
+          map: this.map,          
+          icon : "assets/images/market_user.png",
         });
       }else{
         this.marker.setPosition(this.mapOptions.center);
@@ -131,6 +140,7 @@ export class VerRecoleccionPage implements OnInit ,AfterViewInit {
       if(this.marker === undefined){
         this.marker = new google.maps.Marker({
           position: this.mapOptions.center,
+          icon : "assets/images/map/market_user.png",
           map: this.map,
         });
         
@@ -164,16 +174,12 @@ export class VerRecoleccionPage implements OnInit ,AfterViewInit {
     const loading = await this.loadingController.create();
     loading.present();
     this.data = await this.puntoRecoleccionService.getCollectionPointMaterial(0,10,'Espera',this.material).toPromise();
-    console.log(JSON.stringify(this.data));      
     if(this.data.status === 200 && this.data.data.numberOfRecords !== 0){
-      //this.puntoRecoleccionService.listaRecoleccion = await this.data.data.records;
-      await this.arreglarRuta(this.data.data.records, this.mapOptions.center,);
-      setTimeout(async () => {
-        this.puntoRecoleccionService.listaRecoleccion = this.listaNueva;
-        this.navCtrl.navigateForward('/reciclador/aceptar-recoleccion', { animated: false });        
-        await loading.dismiss();
-        this.toggleFab();
-      }, 2000);
+      await this.arreglarRuta(this.data.data.records, this.mapOptions.center);     
+      this.puntoRecoleccionService.listaRecoleccion = this.listaNueva;
+      this.navCtrl.navigateForward('/reciclador/aceptar-recoleccion', { animated: false });
+      await loading.dismiss();
+      this.toggleFab();
     }else{
       loading.dismiss();
       this.presentAlert("No se encontraron publicaciones.");
@@ -187,15 +193,11 @@ export class VerRecoleccionPage implements OnInit ,AfterViewInit {
     this.data = await this.puntoRecoleccionService.listaPaginada(0,10,'Espera').toPromise();
     console.log(JSON.stringify(this.data));      
     if(this.data.status === 200 && this.data.data.numberOfRecords !== 0){
-      //this.puntoRecoleccionService.listaRecoleccion = await this.data.data.records;
       await this.arreglarRuta(this.data.data.records, this.mapOptions.center);   
-      setTimeout(async () => {
-        console.log('LISTA NUEVA '+JSON.stringify(this.listaNueva));        
-        this.puntoRecoleccionService.listaRecoleccion = this.listaNueva;
-        this.navCtrl.navigateForward('/reciclador/aceptar-recoleccion', { animated: false });        
-        await loading.dismiss(); 
-        this.toggleFab();     
-      }, 2000);
+      this.puntoRecoleccionService.listaRecoleccion = this.listaNueva;
+      this.navCtrl.navigateForward('/reciclador/aceptar-recoleccion', { animated: false });        
+      await loading.dismiss(); 
+      this.toggleFab(); 
     }else{
       loading.dismiss();
       this.presentAlert("No se encontraron publicaciones.");
@@ -234,28 +236,39 @@ export class VerRecoleccionPage implements OnInit ,AfterViewInit {
 
   async arreglarRuta(lista : CollectionPoint[], origen : {lat: number ,lng: number}){    
     var min = google.maps.geometry.spherical.computeDistanceBetween(origen, {lat : lista[0].address.latitude, lng : lista[0].address.longitude});  
-      var datoMinimo : CollectionPoint;
-      var dato = 1;
-      var eliminar = 0;
-      if(lista.length === 1){
-        this.listaNueva.push(lista[0]);
-      }else{
-        for (let i = 1; i < lista.length; i++) {
-          dato = dato + 1;
-          const distancia = google.maps.geometry.spherical.computeDistanceBetween(origen, {lat : lista[i].address.latitude, lng : lista[i].address.longitude});
-          if (distancia < min) {                   
-            eliminar = i;
-            datoMinimo = lista[i];
-            if(dato === lista.length){
-              lista.splice(eliminar,1);
-              this.listaNueva.push(datoMinimo);
-              if(lista.length !== 0){
-                this.arreglarRuta(lista, { lat : datoMinimo.address.latitude, lng : datoMinimo.address.longitude });
-              }
+    var datoMinimo : CollectionPoint;
+    var dato = 1;
+    var eliminar = 0;
+    if(lista.length === 1){
+      this.listaNueva.push(lista[0]);
+      return;
+    }else{
+      for (let i = 1; i < lista.length; i++) {
+        dato = dato + 1;
+        const distancia = google.maps.geometry.spherical.computeDistanceBetween(origen, {lat : lista[i].address.latitude, lng : lista[i].address.longitude});
+        if (distancia < min) {                
+          eliminar = i;
+          datoMinimo = lista[i];
+          if(dato === lista.length){
+            lista.splice(eliminar,1);
+            this.listaNueva.push(datoMinimo);
+            if(lista.length !== 0){
+              this.arreglarRuta(lista, { lat : datoMinimo.address.latitude, lng : datoMinimo.address.longitude });
+            }
+          }
+        }else if(distancia > min){
+          eliminar = 0;
+          datoMinimo = lista[0];
+          if(dato === lista.length){
+            lista.splice(eliminar,1);
+            this.listaNueva.push(datoMinimo);
+            if(lista.length !== 0){
+              this.arreglarRuta(lista, { lat : datoMinimo.address.latitude, lng : datoMinimo.address.longitude });
             }
           }
         }
       }
+    }
   }
 
 }

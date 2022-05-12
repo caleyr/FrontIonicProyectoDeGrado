@@ -39,7 +39,7 @@ export class OpcionesMaterialPage implements OnInit {
         {
           text: 'Confirmar',
           handler: (blah) => {
-            this.userService.eliminarDireccion(this.id).subscribe();
+            this.userService.eliminarMaterial(this.id).subscribe();
           }
         }        
       ]

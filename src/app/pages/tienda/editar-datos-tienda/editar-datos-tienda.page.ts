@@ -36,8 +36,6 @@ export class EditarDatosTiendaPage implements OnInit {
   inicializarFormulario() {
     this.form = this.formBuilder.group({
       nombre: [this.tienda.name , [Validators.required]],
-      tipoDocumento: [this.tienda.documentType , [Validators.required]],
-      numeroDocumento: [ this.tienda.document , [Validators.required, Validators.pattern('[0-9]*')]],
       telefono: [ this.tienda.phone , [Validators.required, Validators.pattern('[0-9]*')]]
     }); 
   }
@@ -47,8 +45,8 @@ export class EditarDatosTiendaPage implements OnInit {
 
       let tienda = new Shop();
         tienda.name = this.getNombre().value;
-        tienda.documentType = this.getTipoDocumento().value;
-        tienda.document = this.getNumeroDocumento().value;
+        tienda.documentType = this.tienda.documentType;
+        tienda.document = this.tienda.document;
         tienda.phone = this.getTelefono().value;
 
         this.userService.updateShop(tienda, this.id).subscribe(
@@ -95,14 +93,6 @@ export class EditarDatosTiendaPage implements OnInit {
   getNombre(){
     return this.form.get('nombre');
   }
-
-  getTipoDocumento(){
-    return this.form.get('tipoDocumento');
-  }
-
-  getNumeroDocumento(){
-    return this.form.get('numeroDocumento');
-  }  
 
   getTelefono(){
     return this.form.get('telefono');

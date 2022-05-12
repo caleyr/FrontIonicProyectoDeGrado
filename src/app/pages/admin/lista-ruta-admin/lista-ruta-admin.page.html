@@ -7,10 +7,6 @@
           Rutas
       </ion-title>
   </ion-toolbar>
-  <div class="search_box">
-      <ion-icon class="zmdi zmdi-search ion-text-start"></ion-icon>
-      <ion-searchbar class="ion-no-padding" searchIcon="hide" placeholder="Buscar Correo"></ion-searchbar>
-  </div>
 </ion-header>
 
 <ion-content>
@@ -42,14 +38,14 @@
               <div class="item_info d-flex">
                 <div class="item_details">
                   <h3 class="d-flex">
-                      {{lista.listaRecycler?.email}}
+                      {{lista.user?.email}}
                       <span class="end order_status">
                         <div *ngIf="lista.endDate !== '0001-01-01T00:00:00'">
-                          {{lista.endDate | date: 'shortDate'}}
+                          {{lista.endDate | date:'MMM d, y, h:mm a'}}
                         </div>
                       </span>
                   </h3>
-                  <h4 class="d-flex">{{lista.startDate | date: 'shortDate'}}</h4>
+                  <h4 class="d-flex">{{lista.startDate | date:'MMM d, y, h:mm a'}}</h4>
                 </div> 
               </div>                         
           </div>

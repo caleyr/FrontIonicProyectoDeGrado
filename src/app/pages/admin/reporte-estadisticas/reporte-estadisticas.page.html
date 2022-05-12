@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+          <div class="d-flex title_inner">
+              Estadisticas
+              <div class="form end">
+                  <ion-item lines="none">
+                      <div class="item_inner d-flex">
+                          <ion-select mode="ios" interface="popover" [(ngModel)]="tiempo" (ngModelChange)="cambiarGrafica(tiempo)">
+                              <ion-select-option value="HOY">Hoy</ion-select-option>
+                              <ion-select-option value="SEMANA">Semana</ion-select-option>
+                              <ion-select-option value="MES">Mes</ion-select-option>
+                          </ion-select>
+                          <ion-icon class="zmdi zmdi-caret-down ion-text-end"></ion-icon>
+                      </div>
+                  </ion-item>
+              </div>
+          </div>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color" fullscreen>
+  <ion-card class="tab">
+      <ion-row>
+          <ion-col size="6" class="ion-text-center">
+              <h2>{{ruta.length}}</h2>
+              <p>Rutas</p>
+          </ion-col>
+          <ion-col size="6" class="ion-text-center">
+              <h2>{{puntos.length}}</h2>
+              <p>Puntos de Recolección</p>
+          </ion-col>
+      </ion-row>
+  </ion-card>
+
+  <ion-card>
+     <div class="card_containt">
+        <h1>Rutas</h1>
+        <div class="graph_container d-flex" *ngIf="ruta.length !== 0">
+            <div class="text_container">
+                <p class="ion-text-end"><span>{{ruta.length}}</span></p>
+                <p *ngFor="let lista of listaRangoRuta" class="ion-text-end"><span>{{lista}}</span></p>
+            </div>
+            <div class="graph end">
+                <div class="bar_box" *ngFor="let lista of listaResultadosRuta">
+                    <h4>{{lista.material}}</h4>
+                    <div class="bar" [ngStyle]="{ 'height' : lista.porcentaje + '%' }">
+                        <h5>{{lista.cantidad}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="graph_container d-flex" *ngIf="ruta.length === 0">
+            <div class="text_container">            
+                <p class="ion-text-end"><span>5</span></p>
+                <p class="ion-text-end"><span>4</span></p>
+                <p class="ion-text-end"><span>3</span></p>
+                <p class="ion-text-end"><span>2</span></p>
+                <p class="ion-text-end"><span>1</span></p>
+                <p class="ion-text-end"><span>0</span></p>
+            </div>
+            <div class="graph end">
+                <div class="bar_box">
+                    <h4>Plastico</h4>
+                    <div class="bar" style="height : 0%;">
+                        <h5>0</h5>
+                    </div>
+                </div>
+                <div class="bar_box">
+                    <h4>CartonYPapel</h4>
+                    <div class="bar" style="height : 0%;">
+                        <h5>0</h5>
+                    </div>
+                </div>
+                <div class="bar_box">
+                    <h4>VidrioOMetal</h4>
+                    <div class="bar" style="height : 0%;">
+                        <h5>0</h5>
+                    </div>
+                </div>
+                <div class="bar_box">
+                    <h4>Todos</h4>
+                    <div class="bar" style="height : 0%;">
+                        <h5>0</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+
+      <div class="card_containt">
+        <h1>Puntos de Recolección</h1>
+        <div class="graph_container d-flex" *ngIf="puntos.length !== 0">
+            <div class="text_container">
+                <p class="ion-text-end"><span>{{puntos.length}}</span></p>
+                <p *ngFor="let lista of listaRangoPuntos" class="ion-text-end"><span>{{lista}}</span></p>                
+            </div>
+            <div class="graph end">
+                <div class="bar_box" *ngFor="let lista of listaResultadosPunto">
+                    <h4>{{lista.material}}</h4>
+                    <div class="bar" [ngStyle]="{ 'height' : lista.porcentaje + '%' }">
+                        <h5>{{lista.cantidad}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="graph_container d-flex" *ngIf="puntos.length === 0">
+            <div class="text_container">            
+                <p class="ion-text-end"><span>5</span></p>
+                <p class="ion-text-end"><span>4</span></p>
+                <p class="ion-text-end"><span>3</span></p>
+                <p class="ion-text-end"><span>2</span></p>
+                <p class="ion-text-end"><span>1</span></p>
+                <p class="ion-text-end"><span>0</span></p>
+            </div>
+            <div class="graph end">
+                <div class="bar_box">
+                    <h4>Plastico</h4>
+                    <div class="bar" style="height : 0%;">
+                        <h5>0</h5>
+                    </div>
+                </div>
+                <div class="bar_box">
+                    <h4>CartonYPapel</h4>
+                    <div class="bar" style="height : 0%;">
+                        <h5>0</h5>
+                    </div>
+                </div>
+                <div class="bar_box">
+                    <h4>VidrioOMetal</h4>
+                    <div class="bar" style="height : 0%;">
+                        <h5>0</h5>
+                    </div>
+                </div>
+                <div class="bar_box">
+                    <h4>Todos</h4>
+                    <div class="bar" style="height : 0%;">
+                        <h5>0</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+  </ion-card>
+</ion-content>
