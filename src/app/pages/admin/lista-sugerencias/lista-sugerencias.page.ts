@@ -12,7 +12,7 @@ import { User } from '../../../model/User';
 export class ListaSugerenciasPage implements OnInit {
 
   id = null;
-  listaComentario : Comments[] = [];
+  listaComentario : Comments[] = null;
 
   constructor(
     private apiService : ApiService,
@@ -73,7 +73,7 @@ export class ListaSugerenciasPage implements OnInit {
 
   doRefresh(event){
     setTimeout(()=>{
-      this.listaComentario = [];
+      this.listaComentario = null;
       this.cargarDatosId();
       event.target.complete();
     }, 500);

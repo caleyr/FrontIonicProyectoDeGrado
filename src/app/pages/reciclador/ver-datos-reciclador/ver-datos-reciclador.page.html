@@ -4,74 +4,77 @@
         <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
       </ion-buttons>
       <ion-title>
-        <div class="title_inner d-flex">
-          <span class="offline">Ver Perfil</span>
-        </div>
+        Ver Perfil
       </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="bg_color" fullscreen>
   <ion-list lines="none">
-      <div class="item_list">
+      <div class="lista_detalles">
         <h1>Informacion del Usuario</h1>
         <ion-item>
-          <div class="item_inner">
-              <div class="text_box">
+          <div class="item_General">
+              <div class="cajaText">
                   <h3>Correo</h3>
-                  <div class="buttons d-flex">
-                      <h5>{{usuario.email}}</h5>
+                  <div class="text_final d-flex">
+                      <h5 *ngIf="usuario.email !== undefined">{{usuario.email}}</h5>
+                      <ion-skeleton-text animated style="width: 50%" *ngIf="usuario.email === undefined"></ion-skeleton-text>
                   </div>
               </div>
           </div>
         </ion-item>
       </div>
 
-      <div class="item_list">
+      <div class="lista_detalles">
         <h1>Datos Personales</h1>
         <ion-item>
-            <div class="item_inner">
-                <div class="text_box">
+            <div class="item_General">
+                <div class="cajaText">
                     <h3>Nombre</h3>
-                    <div class="buttons d-flex">
-                        <h5>{{reciclador.name}}</h5>
+                    <div class="text_final d-flex">
+                        <h5 *ngIf="reciclador.name !== undefined">{{reciclador.name}}</h5>
+                        <ion-skeleton-text animated style="width: 50%" *ngIf="reciclador.name === undefined"></ion-skeleton-text>
                     </div>
                 </div>
             </div>
         </ion-item>
         <ion-item>
-          <div class="item_inner">
-              <div class="text_box">
+          <div class="item_General">
+              <div class="cajaText">
                   <h3>Apellido</h3>
-                  <div class="buttons d-flex">
-                      <h5>{{reciclador.lastName}}</h5>
+                  <div class="text_final d-flex">
+                      <h5 *ngIf="reciclador.lastName !== undefined">{{reciclador.lastName}}</h5>
+                      <ion-skeleton-text animated style="width: 50%" *ngIf="reciclador.lastName === undefined"></ion-skeleton-text>
                   </div>
               </div>
           </div>
         </ion-item>
         <ion-item>
-          <div class="item_inner">
-              <div class="text_box">
+          <div class="item_General">
+              <div class="cajaText">
                   <h3>Documento</h3>
-                  <div class="buttons d-flex">
-                      <h5>{{reciclador.documentType +' '+ reciclador.document}}</h5>
+                  <div class="text_final d-flex">
+                      <h5 *ngIf="reciclador.document !== undefined">{{reciclador.documentType +' '+ reciclador.document}}</h5>
+                      <ion-skeleton-text animated style="width: 50%" *ngIf="reciclador.document === undefined"></ion-skeleton-text>
                   </div>
               </div>
           </div>
         </ion-item>
         <ion-item>
-          <div class="item_inner">
-              <div class="text_box">
+          <div class="item_General">
+              <div class="cajaText">
                   <h3>Teléfono</h3>
-                  <div class="buttons d-flex">
-                      <h5>{{reciclador.phone}}</h5>
+                  <div class="text_final d-flex">
+                      <h5 *ngIf="reciclador.phone !== undefined">{{reciclador.phone}}</h5>
+                      <ion-skeleton-text animated style="width: 50%" *ngIf="reciclador.phone === undefined"></ion-skeleton-text>
                   </div>
               </div>
           </div>
         </ion-item>
       </div>
 
-      <div>
+      <div *ngIf="reciclador.name !== undefined">
         <ion-item [routerLink]="['/reciclador/editar-datos-reciclador', reciclador.id]" class="button_detail">
           <ion-icon name="create-outline" slot="start"></ion-icon>        
           <h5>Editar Datos</h5>

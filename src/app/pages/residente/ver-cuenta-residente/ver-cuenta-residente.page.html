@@ -2,10 +2,15 @@
   <ion-toolbar>
       <ion-title>Mi Cuenta</ion-title>
   </ion-toolbar>
-  <div class="profile_info">
+  <div class="info_perfil" *ngIf="residente !== null">
       <h2>{{residente.name + ' ' + residente.lastName}}</h2>
       <p>{{residente.phone}}</p>
       <p>{{residente.user?.email}}</p>
+  </div>
+  <div class="info_perfil" *ngIf="residente === null">
+    <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
   </div>
 </ion-header>
 
@@ -14,7 +19,7 @@
 
       <ion-item routerLink="/residente/ver-datos-residente">
         <div class="item_inner d-flex">
-            <div class="icon_box ion-text-start">
+            <div class="cajaIcono ion-text-start">
                 <img src="assets/images/perfil_primary.png">
             </div>
             <h2>Ver Datos</h2>
@@ -23,7 +28,7 @@
 
       <ion-item routerLink="/tabs-residente/crear-publicacion">
           <div class="item_inner d-flex">
-              <div class="icon_box ion-text-start">
+              <div class="cajaIcono ion-text-start">
                   <img class="recycler" src="assets/images/logo_primary.png">
               </div>
               <h2>Crear Reciclaje</h2>
@@ -32,7 +37,7 @@
 
       <ion-item routerLink="/tabs-residente/ver-historial">
           <div class="item_inner d-flex">
-              <div class="icon_box ion-text-start">
+              <div class="cajaIcono ion-text-start">
                   <img class="recycler" src="assets/images/historial_primary.png">
               </div>
               <h2>Publicaciones</h2>
@@ -41,7 +46,7 @@
 
       <ion-item routerLink="/residente/ver-comentario-residente">
         <div class="item_inner d-flex" >
-            <div class="icon_box ion-text-start">
+            <div class="cajaIcono ion-text-start">
                 <img class="recycler" src="assets/images/notification_primary.png">
             </div>
             <h2>Notificaciones</h2>
@@ -50,7 +55,7 @@
       
       <ion-item routerLink="/cuidados">
         <div class="item_inner d-flex" >
-            <div class="icon_box ion-text-start">
+            <div class="cajaIcono ion-text-start">
                 <img class="recycler" src="assets/images/cuidados_primary.png">
             </div>
             <h2>Cuidados</h2>
@@ -59,7 +64,7 @@
 
       <ion-item routerLink="/usuarios/enviar-sugerencia">
         <div class="item_inner d-flex">
-            <div class="icon_box ion-text-start">
+            <div class="cajaIcono ion-text-start">
                 <img class="recycler" src="assets/images/sugerencia_primary.png">
             </div>
             <h2>Sugerencia</h2>
@@ -68,7 +73,7 @@
 
       <ion-item (click)="apiService.logOut()">
           <div class="item_inner d-flex">
-              <div class="icon_box ion-text-start">
+              <div class="cajaIcono ion-text-start">
                   <img src="assets/images/log_out_primary.png">
               </div>
               <h2>Cerrar Sesión</h2>

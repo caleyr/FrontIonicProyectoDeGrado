@@ -13,29 +13,45 @@
 
 <ion-content class="bg_color" fullscreen>  
   <ion-list>
-    <div *ngIf="listaDireccion.length!==0">        
-      <h1>Direccion</h1>
-      <ion-list>
-        <div class="item_list">
-            <ion-item *ngFor="let listaD of listaDireccion" routerLink="/residente/crear-punto-recoleccion/agregar-descripcion-recoleccion" (click)="enviarDireccion(listaD)" detail>
-              <div class="item_inner">
-                  <div class="text_box">               
-                    <h3 *ngIf="listaD.numberOne !== null">{{listaD.streetType + ' ' + listaD.career + ' #' + listaD.numberOne + ' - ' + listaD.numberTwo}}</h3>
-                    <h3 *ngIf="listaD.numberOne === null">{{listaD.streetType + ' ' + listaD.career}}</h3>
-                    <h3>{{listaD.description}}</h3>
-                    <h3>Facatativá , {{listaD.neighborhood}}</h3>
-                  </div>
-              </div>             
-            </ion-item>
-        </div>
-      </ion-list>
+    <div *ngIf="listaDireccion !== null">
+      <div *ngIf="listaDireccion.length!==0">
+        <h1>Direccion</h1>
+        <ion-list>
+          <div class="item_list">
+              <ion-item *ngFor="let listaD of listaDireccion" routerLink="/residente/crear-punto-recoleccion/agregar-descripcion-recoleccion" (click)="enviarDireccion(listaD)" detail>
+                <div class="item_inner">
+                    <div class="text_box">               
+                      <h3 *ngIf="listaD.numberOne !== null">{{listaD.streetType + ' ' + listaD.career + ' #' + listaD.numberOne + ' - ' + listaD.numberTwo}}</h3>
+                      <h3 *ngIf="listaD.numberOne === null">{{listaD.streetType + ' ' + listaD.career}}</h3>
+                      <h3>{{listaD.description}}</h3>
+                      <h3>Facatativá , {{listaD.neighborhood}}</h3>
+                    </div>
+                </div>             
+              </ion-item>
+          </div>
+        </ion-list>
+      </div>
+  
+      <div *ngIf="listaDireccion.length < 4">
+        <ion-item [routerLink]= "['/usuarios/agregar-direccion/residente/crearPunto', id]" class="button_detail">
+          <ion-icon name="location-sharp" slot="start"></ion-icon>
+          <h5>Agregar Domicilio</h5>
+        </ion-item>        
+      </div>
     </div>
 
-    <div *ngIf="listaDireccion.length < 4">
-      <ion-item [routerLink]= "['/usuarios/agregar-direccion/residente/crearPunto', id]" class="button_detail">
-        <ion-icon name="location-sharp" slot="start"></ion-icon>
-        <h5>Agregar Domicilio</h5>
-      </ion-item>        
-    </div>
+    <ion-list *ngIf="listaDireccion === null">
+      <div class="item_list">
+          <ion-item *ngFor="let item of [1,1,1,1]">
+            <div class="item_inner">
+                <div class="text_box">               
+                  <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+                  <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                  <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </div>
+            </div>             
+          </ion-item>
+      </div>
+    </ion-list>
   </ion-list>
 </ion-content>

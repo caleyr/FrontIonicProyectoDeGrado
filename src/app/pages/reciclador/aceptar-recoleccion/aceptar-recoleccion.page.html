@@ -18,31 +18,31 @@
 
 <ion-footer class="ion-no-border">
     <ion-card *ngIf="destino">
-        <div class="card_header d-flex">
-            <div class="img_box">
+        <div class="icon_reciclaje d-flex">
+            <div class="cajaImg">
                 <img src="assets/registro/registro2.png">
             </div>
-            <div class="text_box">
+            <div class="cajaText">
                 <h2>{{destino.typeOfMaterial}}</h2>
                 <h3>{{distancia}} km <span>({{duracion}} min)</span></h3>
             </div>
         </div>
-        <div class="delivery_details">
-            <div class="delivery_address d-flex">
+        <div class="detalles_reciclaje">
+            <div class="direccion d-flex">
                 <ion-icon class="zmdi zmdi-pin ion-text-center"></ion-icon>
-                <div class="text_box">
+                <div class="cajaText">
                     <h2>Destino</h2>
                     <p>Facatativa, {{destino.address.neighborhood}}, {{destino.address.streetType}}{{destino.address.career}} {{destino.address.numberOne}}-{{destino.address.numberTwo}}</p>
                 </div>
             </div>
-            <div class="dotted">
+            <div class="espacios">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <div class="delivery_address d-flex">
+            <div class="direccion d-flex">
                 <ion-icon class="zmdi zmdi-navigation ion-text-center"></ion-icon>
-                <div class="text_box">                    
+                <div class="cajaText">                    
                     <h2 class="pd">Tu Ubicacion</h2>
                 </div>
             </div>
@@ -54,7 +54,7 @@
             <div class="img_box">
                 <img src="assets/registro/registro2.png">
             </div>
-            <div class="text_box">
+            <div class="cajaText">
                 <h2>
                     <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
                 </h2>
@@ -65,24 +65,24 @@
                 </h3>
             </div>
         </div>
-        <div class="delivery_details">
-            <div class="delivery_address d-flex">
+        <div class="detalles_reciclaje">
+            <div class="direccion d-flex">
                 <ion-icon class="zmdi zmdi-pin ion-text-center"></ion-icon>
-                <div class="text_box">
+                <div class="cajaText">
                     <h2>Destino</h2>
                     <p>
                         <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
                     </p>
                 </div>
             </div>
-            <div class="dotted">
+            <div class="espacios">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <div class="delivery_address d-flex">
+            <div class="direccion d-flex">
                 <ion-icon class="zmdi zmdi-navigation ion-text-center"></ion-icon>
-                <div class="text_box">                    
+                <div class="cajaText">                    
                     <h2 class="pd">Tu Ubicacion</h2>
                 </div>
             </div>

@@ -8,12 +8,12 @@
 
 <ion-content class="bg_color" fullscreen>
   <ion-list lines="none">
-      <ion-item class="feature_image">
-        <div class="item_inner">
+      <ion-item class="imagen_tienda">
+        <div class="item_General">
             <h2> Imagen de Tienda</h2>
             <div class="d-flex" style="align-items: flex-start;">
-                <div class="img_box center_img">
-                    <img *ngIf="tienda.image === null" src="assets/images/placeholder.png" class="crop_img">
+                <div class="cajaImagen center_img">
+                    <img *ngIf="tienda.image === undefined || tienda.image === null" src="assets/images/placeholder.png" class="crop_img">
                     <img *ngIf="tienda.image !== null" src="{{tienda.image}}" class="crop_img">
                 </div>
                 <ion-chip outline (click)="addNewToGallery()">
@@ -23,48 +23,52 @@
             </div>
         </div>
       </ion-item>
-      <div class="item_list">
+      <div class="lista_datos">
         <h1>Informacion del Usuario</h1>
         <ion-item>
-          <div class="item_inner">
-              <div class="text_box">
+          <div class="item_General">
+              <div class="cajaText">
                   <h3>Correo</h3>
-                  <div class="buttons d-flex">
-                      <h5>{{usuario.email}}</h5>
+                  <div class="text_final d-flex">
+                      <h5 *ngIf="usuario.email !== undefined">{{usuario.email}}</h5>
+                      <ion-skeleton-text *ngIf="usuario.email === undefined" animated style="width: 50%"></ion-skeleton-text>
                   </div>
               </div>
           </div>
         </ion-item>
       </div>
 
-      <div class="item_list">
+      <div class="lista_datos">
         <h1>Datos Personales</h1>
         <ion-item>
-            <div class="item_inner">
-                <div class="text_box">
+            <div class="item_General">
+                <div class="cajaText">
                     <h3>Nombre</h3>
-                    <div class="buttons d-flex">
-                        <h5>{{tienda.name}}</h5>
+                    <div class="text_final d-flex">
+                        <h5 *ngIf="tienda.name !== undefined" >{{tienda.name}}</h5>
+                        <ion-skeleton-text *ngIf="tienda.name === undefined" animated style="width: 50%"></ion-skeleton-text>
                     </div>
                 </div>
             </div>
         </ion-item>
         <ion-item>
-          <div class="item_inner">
-              <div class="text_box">
+          <div class="item_General">
+              <div class="cajaText">
                   <h3>Documento</h3>
-                  <div class="buttons d-flex">
-                      <h5>{{tienda.documentType + ' ' +tienda.document}}</h5>
+                  <div class="text_final d-flex">
+                      <h5 *ngIf="tienda.documentType !== undefined">{{tienda.documentType + ' ' +tienda.document}}</h5>
+                      <ion-skeleton-text *ngIf="tienda.documentType === undefined" animated style="width: 50%"></ion-skeleton-text>
                   </div>
               </div>
           </div>
         </ion-item>
         <ion-item>
-          <div class="item_inner">
-              <div class="text_box">
+          <div class="item_General">
+              <div class="cajaText">
                   <h3>Teléfono</h3>
-                  <div class="buttons d-flex">
-                      <h5>{{tienda.phone}}</h5>
+                  <div class="text_final d-flex">
+                      <h5 *ngIf="tienda.phone !== undefined">{{tienda.phone}}</h5>
+                      <ion-skeleton-text *ngIf="tienda.phone === undefined" animated style="width: 50%"></ion-skeleton-text>
                   </div>
               </div>
           </div>
@@ -72,19 +76,19 @@
       </div>
 
       <div>
-        <ion-item [routerLink]="['/tienda/editar-datos-tienda', tienda.id]" class="button_detail">
+        <ion-item [routerLink]="['/tienda/editar-datos-tienda', tienda.id]" class="botonDetalles">
           <ion-icon name="create-outline" slot="start"></ion-icon>        
           <h5>Editar Datos</h5>
         </ion-item>        
       </div>
 
-      <div class="item_list">
+      <div class="lista_datos" *ngIf="materiales.length !== 0">
         <h1>Lista de Materiales</h1>
         <ion-item *ngFor="let material of materiales" (click)="actualizarMaterial(material)">
-            <div class="item_inner">
-                <div class="text_box">
+            <div class="item_General">
+                <div class="cajaText">
                     <h3>{{material.typeOfMaterial}}</h3>
-                    <div class="buttons d-flex"> 
+                    <div class="text_final d-flex"> 
                         <h5>1 kg x 1</h5>
                         <h4 class="ion-text-end end">$ {{material.price}}</h4>
                     </div>
@@ -97,7 +101,7 @@
       </div>
 
       <div>
-        <ion-item [routerLink]= "['/tienda/agregar-material/crear', tienda.id]" class="button_detail">
+        <ion-item [routerLink]= "['/tienda/agregar-material/crear', tienda.id]" class="botonDetalles">
           <ion-icon name="basket" slot="start"></ion-icon>
           <h5>Agregar Material</h5>
         </ion-item>        
@@ -106,10 +110,10 @@
       <div *ngIf="direccion !== null">        
         <h1>Direccion</h1>
         <ion-list>
-          <div class="item_list">
+          <div class="lista_datos">
               <ion-item (click)="actualizarDireccion(direccion)">
-                <div class="item_inner">
-                    <div class="text_box">               
+                <div class="item_General">
+                    <div class="cajaText">               
                       <h3 *ngIf="direccion.numberOne !== null">{{direccion.streetType + ' ' + direccion.career + ' #' + direccion.numberOne + ' - ' + direccion.numberTwo}}</h3>
                       <h3 *ngIf="direccion.numberOne === null">{{direccion.streetType + ' ' + direccion.career}}</h3>
                       <h3>{{direccion.description}}</h3>
@@ -125,7 +129,7 @@
       </div>
 
       <div *ngIf="direccion === null">
-        <ion-item [routerLink]= "['/usuarios/agregar-direccion/tienda/crear', tienda.id]" class="button_detail">
+        <ion-item [routerLink]= "['/usuarios/agregar-direccion/tienda/crear', tienda.id]" class="botonDetalles">
           <ion-icon name="location-sharp" slot="start"></ion-icon>
           <h5>Agregar Domicilio</h5>
         </ion-item>        

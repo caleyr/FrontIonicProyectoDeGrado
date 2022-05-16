@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class VerCuentaResidentePage implements OnInit {
 
-  residente : Resident = new Resident();
+  residente : Resident = null;
   suscripcion : Subscription;
 
   constructor(    

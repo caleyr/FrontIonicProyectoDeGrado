@@ -1,7 +1,8 @@
 {
   "name": "FrontIonicProyectoDeGrado",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

@@ -21,7 +21,7 @@
         <ion-label>Total</ion-label>
     </ion-segment-button>
   </ion-segment>
-  <div class="banner" *ngIf="segment == 1">
+  <div class="total_Precio" *ngIf="segment == 1">
     <h2>PRECIO TOTAL</h2>
     <h1>$ {{total}}</h1>
   </div>
@@ -33,7 +33,7 @@
         <ion-list lines="none">   
           <div class="form">
             <ion-item lines="none">
-              <div class="item_inner d-flex">
+              <div class="item_General d-flex">
                   <div class="input_box">
                       <ion-label mode="md" position="stacked">Tipo de Material</ion-label>
                       <div class="d-flex" style="align-items: flex-end;">
@@ -47,11 +47,11 @@
               </div>
             </ion-item>
 
-            <div class="item_price" *ngIf="material.typeOfMaterial !== undefined">
+            <div class="item_precio" *ngIf="material.typeOfMaterial !== undefined">
               <ion-row>
                 <ion-col size="6">
                     <ion-item lines="none">
-                        <div class="item_inner d-flex">
+                        <div class="item_General d-flex">
                             <div class="input_box">
                                 <ion-label mode="md" class="dsb" position="stacked">Precio del Material</ion-label>
                                 <ion-input mode="md" class="dsb" disabled type="name" value="$ {{material.price}}"></ion-input>
@@ -62,7 +62,7 @@
 
                 <ion-col size="6">
                     <ion-item lines="none">
-                        <div class="item_inner d-flex">
+                        <div class="item_General d-flex">
                             <div class="input_box">
                                 <ion-label mode="md" position="stacked" class="ion-text-end">Peso x Kg</ion-label>
                                 <ion-input mode="md" type="text" inputmode="numeric" maxLength="2" class="ion-text-end" placeholder="0" [(ngModel)]="cantidad"></ion-input>
@@ -81,7 +81,7 @@
         </ion-list>
       </ion-slide>
       <ion-slide>
-        <ion-list lines="none" class="list_detaills">
+        <ion-list lines="none" class="list_detalles">
           <ion-item *ngFor="let item of historial">
             <ion-row>
                 <ion-col size="6">

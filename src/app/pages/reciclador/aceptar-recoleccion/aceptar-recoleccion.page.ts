@@ -212,7 +212,7 @@ export class AceptarRecoleccionPage implements AfterViewInit, OnInit{
   async crearRuta() {
     const alert = await this.alertController.create({
       cssClass:'my-custom-class',
-      message: 'Aceptar la ruta.',
+      header: 'Aceptar la ruta.',
       mode: 'ios',
       buttons: [
         {

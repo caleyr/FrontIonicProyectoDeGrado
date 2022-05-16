@@ -16,11 +16,22 @@ export class ListaRecoleccionResidentePage implements OnInit {
 
   id : any;
 
-  listaPuntosEspera: CollectionPoint[] = [];
-  listaPuntosActivo: CollectionPoint[] = [];
-  listaPuntosFinalizado: CollectionPoint[] = [];
+  listaPuntosEspera: CollectionPoint[] = null;
+  listaPuntosActivo: CollectionPoint[] = null;
+  listaPuntosFinalizado: CollectionPoint[] = null;
   segment = 0;  
-  contador = 0; 
+  
+  contadorEspera = 0;
+  contadorActivo = 0;
+  contadorFinalizado = 0; 
+
+  cantidadEspera = 0;
+  cantidadActivo = 0;
+  cantidadFinalizado = 0; 
+
+  recargarEspera = false;
+  recargarActivo = false;
+  recargarFinalizado = false;  
 
   suscripcion : Subscription;
   
@@ -53,59 +64,69 @@ export class ListaRecoleccionResidentePage implements OnInit {
     this.segment = await this.slider.getActiveIndex();
   }
 
-  cargarLista(event?){
-    this.contador = 0;
-    this.puntoRecoleccion.listaPaginadaResidente(this.contador, 10, this.id ,"Espera").subscribe(data => {
+  cargarLista(){
+    this.puntoRecoleccion.listaPaginadaResidente(0, 10, this.id ,"Espera").subscribe(data => {
       this.listaPuntosEspera = data.data.records;
+      this.cantidadEspera = data.data.numberOfRecords;
     });
-    this.puntoRecoleccion.listaPaginadaResidente(this.contador, 10, this.id, "Activo").subscribe(data => {
+    this.puntoRecoleccion.listaPaginadaResidente(0, 10, this.id, "Activo").subscribe(data => {
       this.listaPuntosActivo = data.data.records;
-      console.log(this.listaPuntosActivo);      
+      this.cantidadActivo = data.data.numberOfRecords;
     });
-    this.puntoRecoleccion.listaPaginadaResidente(this.contador, 10, this.id, "Finalizado").subscribe(data => {
+    this.puntoRecoleccion.listaPaginadaResidente(0, 10, this.id, "Finalizado").subscribe(data => {
       this.listaPuntosFinalizado = data.data.records;
+      this.cantidadFinalizado = data.data.numberOfRecords;
     });
   }
 
-  cargarPageE(event){
-    this.contador++;
-    setTimeout(() => {      
-      this.puntoRecoleccion.listaPaginada(this.contador, 10, "Espera").subscribe(data => {      
+  listarPagina(contador, estado : string){
+    this.puntoRecoleccion.listaPaginadaResidente(contador, 10, this.id, estado).subscribe(data => {
+      if(estado === "Espera"){
         this.listaPuntosEspera = this.listaPuntosEspera.concat(data.data.records);
-        if(this.listaPuntosEspera.length == data.data.numberOfRecords){          
-          event.target.disabled = true;
-        }else{
-          event.target.complete();
-        }
-      });
+      }else if(estado === "Activo"){
+        this.listaPuntosActivo = this.listaPuntosActivo.concat(data.data.records);
+      }else if(estado === "Finalizado"){
+        this.listaPuntosFinalizado = this.listaPuntosFinalizado.concat(data.data.records);
+      }
+    });
+  }
+
+  cargarPageE(event){    
+    setTimeout(() => {
+      this.contadorEspera++;
+      if(this.listaPuntosEspera.length === this.cantidadEspera){     
+        event.target.complete();     
+        this.recargarEspera = true;
+      }else{
+        this.listarPagina(this.contadorEspera, "Espera");
+        event.target.complete();
+      }
     }, 500);
   }
 
   cargarPageA(event){    
-    this.contador++;
-    setTimeout(() => {      
-      this.puntoRecoleccion.listaPaginada(this.contador, 10, "Activo").subscribe(data => {      
-        this.listaPuntosActivo = this.listaPuntosActivo.concat(data.data.records);
-        if(this.listaPuntosActivo.length == data.data.numberOfRecords){          
-          event.target.disabled = true;
-        }else{
-          event.target.complete();
-        }
-      });
+    setTimeout(() => {
+      this.contadorActivo++;
+      if(this.listaPuntosActivo.length === this.cantidadActivo){     
+        event.target.complete();     
+        this.recargarActivo = true;
+      }else{
+        this.listarPagina(this.contadorActivo, "Activo");
+        event.target.complete();
+      }
     }, 500);
   }
 
   cargarPageF(event){    
-    this.contador++;
-    setTimeout(() => {      
-      this.puntoRecoleccion.listaPaginada(this.contador, 10, "Finalizo").subscribe(data => {      
-        this.listaPuntosFinalizado = this.listaPuntosFinalizado.concat(data.data.records);
-        if(this.listaPuntosFinalizado.length == data.data.numberOfRecords){          
-          event.target.disabled = true;
-        }else{
-          event.target.complete();
-        }
-      });
+    setTimeout(() => {
+      this.contadorFinalizado++;
+      if(this.listaPuntosFinalizado.length === this.cantidadFinalizado){        
+        this.recargarFinalizado = true;
+        event.target.complete();
+      }else{
+        this.listarPagina(this.contadorFinalizado, "Finalizado");
+        event.target.complete();
+      }
     }, 500);
   }
 
@@ -143,6 +164,20 @@ export class ListaRecoleccionResidentePage implements OnInit {
   }
 
   doRefresh(event){
+    this.listaPuntosEspera = null;
+    this.listaPuntosActivo = null;
+    this.listaPuntosFinalizado = null;
+    this.contadorEspera = 0;
+    this.contadorActivo = 0;
+    this.contadorFinalizado = 0; 
+
+    this.cantidadEspera = 0;
+    this.cantidadActivo = 0;
+    this.cantidadFinalizado = 0; 
+
+    this.recargarEspera = false;
+    this.recargarActivo = false;
+    this.recargarFinalizado = false; 
     setTimeout(()=>{
       this.cargarLista();
       event.target.complete();

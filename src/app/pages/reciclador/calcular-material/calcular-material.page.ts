@@ -47,7 +47,7 @@ export class CalcularMaterialPage implements OnInit {
   totalCalcular(){
     if(Object.keys(this.historial).length !== 0){
       this.historial.forEach(element => {
-        this.total += element.material.price;
+        this.total += element.material.price * element.cantidad;
       });
     }
   }
@@ -55,7 +55,6 @@ export class CalcularMaterialPage implements OnInit {
   agregarHistorial(){
     if(this.cantidad !== 0 && this.cantidad !== null){
       this.total += this.material.price * this.cantidad;
-      this.material.price = this.material.price * this.cantidad;
       this.historial.push({material : this.material, cantidad : this.cantidad});
       this.userService.historial = this.historial;
       this.segment = 1;

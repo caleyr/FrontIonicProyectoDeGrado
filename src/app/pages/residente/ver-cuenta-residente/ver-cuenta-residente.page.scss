@@ -6,7 +6,7 @@ ion-header {
         text-align: center !important;
     }
 
-    .profile_info {
+    .info_perfil {
         padding: 20px 20px 23px 20px;
 
         h2 {
@@ -42,7 +42,7 @@ ion-list {
         background: var(--white);
         padding: 13px 22px;
 
-        .icon_box {
+        .cajaIcono {
             min-width: 45px;
 
             img {
@@ -60,13 +60,6 @@ ion-list {
             margin: 0;
             color: var(--text-black);
             font-size: 1.15rem;
-        }
-
-        ion-toggle {
-            margin: 0 auto;
-            --background: var(--text-light);
-            --background-checked: var(--text-light);
-            --handle-background-checked: var(--primary);
         }
     }
 }

@@ -11,9 +11,9 @@ import { Subscription } from 'rxjs';
 })
 export class UsuariosPendientesPage implements OnInit {
 
-  lista: User[] = [];
-  listaUsuarioReciclador: User[] = [];
-  listaUsuarioTienda: User[] = [];
+  lista: User[] = null;
+  listaUsuarioReciclador: User[] = null;
+  listaUsuarioTienda: User[] = null;
   segment = 0;
 
   suscripcion : Subscription;
@@ -24,12 +24,12 @@ export class UsuariosPendientesPage implements OnInit {
 
   ngOnInit() {
     this.suscripcion = this.usuarioService.refresh$.subscribe(() =>{
-      this.lista = [];
-      this.listaUsuarioReciclador = [];
-      this.listaUsuarioTienda = [];
+      this.lista = null;
+      this.listaUsuarioReciclador = null;
+      this.listaUsuarioTienda = null;
       this.listar();
     })
-    this.listar();
+    this.listar();  
   }
 
   async segmentoCambiado() {
@@ -42,7 +42,7 @@ export class UsuariosPendientesPage implements OnInit {
 
   async listar() {
     const data = await this.usuarioService.obtenerListaUsuario().toPromise();
-    if(data.status === 200){
+    if(data.status === 200){      
       this.lista = data.data;
       this.listaUsuarioReciclador = this.lista.filter((data) => data.role === "Reciclador" && data.state === false);
       this.listaUsuarioTienda = this.lista.filter((data) => data.role === "isShop" && data.state === false);
@@ -51,9 +51,9 @@ export class UsuariosPendientesPage implements OnInit {
 
   doRefresh(event){
     setTimeout(()=>{
-      this.lista = [];
-      this.listaUsuarioReciclador = [];
-      this.listaUsuarioTienda = [];
+      this.lista = null;
+      this.listaUsuarioReciclador = null;
+      this.listaUsuarioTienda = null;
       this.listar();
       event.target.complete();
     }, 500);

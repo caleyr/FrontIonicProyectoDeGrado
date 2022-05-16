@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class AgregarDireccionRecoleccionPage implements OnInit {
 
-  listaDireccion : Address[] = [];
+  listaDireccion : Address[] = null;
   id : number = null;
 
   suscripcion : Subscription;

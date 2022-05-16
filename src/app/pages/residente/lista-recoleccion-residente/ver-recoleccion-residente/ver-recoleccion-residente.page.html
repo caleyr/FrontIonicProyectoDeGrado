@@ -4,25 +4,28 @@
           <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
       </ion-buttons>
       <ion-title>
-        <div class="title_inner d-flex">
+        <div class="d-flex">
           Detalles
         </div>
       </ion-title>
   </ion-toolbar>
   <ion-item lines="none" *ngIf="estado !== 'espera'">
-    <div class="item_inner">
+    <div class="item_General">
         <div class="item_info d-flex">
-            <div class="itme_img">
+            <div class="item_img">
                 <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png">
             </div>
             <div class="d-flex">
-                <div class="item_details">
-                    <h3 class="d-flex">
+                <div class="detalles_user">
+                    <h3 class="d-flex" *ngIf="user.email !== undefined">
                       {{user.email}}
                     </h3>
-                    <h4 class="d-flex">
+                    <h4 class="d-flex" *ngIf="user.email !== undefined">
                       {{user.role}}
                     </h4>
+                    <ion-skeleton-text *ngIf="user.email === undefined" animated style="width: 50%"></ion-skeleton-text>
+
+                    <ion-skeleton-text *ngIf="user.role === undefined" animated style="width: 50%"></ion-skeleton-text>
                 </div>
             </div>
         </div>
@@ -33,12 +36,13 @@
 <ion-content class="bg_color" fullscreen>
   <ion-list lines="none">    
     <h1>imagen</h1>
-    <div class="item_list">
+    <div class="lista_items">
       <ion-item>
-        <div class="item_inner">
+        <div class="item_General">
             <div class="d-flex" style="align-items: flex-start;">
-              <div class="img_box center_img">
-                <img src="{{punto.image}}" class="crop_img">
+              <div class="cajaImg center_img">
+                <img *ngIf="punto.image !== undefined" src="{{punto.image}}" class="crop_img">
+                <img *ngIf="punto.image === undefined" src="assets/images/placeholder.png" class="crop_img">
               </div>
             </div>
         </div>
@@ -46,48 +50,54 @@
     </div>          
     <h1>Punto de Recoleccion</h1>
     <!-- Residente --> 
-    <div class="item_list">
+    <div class="lista_items">
       <ion-item>
-          <div class="item_inner">
-              <div class="text_box">
+          <div class="item_General">
+              <div class="cajaText">
                   <h3>Tipo de Material</h3>
-                  <div class="buttons d-flex">
-                      <h5>{{punto.typeOfMaterial}}</h5>
+                  <div class="text_final d-flex">
+                      <h5 *ngIf="punto.typeOfMaterial !== undefined">{{punto.typeOfMaterial}}</h5>
+                      <ion-skeleton-text *ngIf="punto.typeOfMaterial === undefined" animated style="width: 50%"></ion-skeleton-text>
                   </div>
               </div>
           </div>
       </ion-item>
       <ion-item>
-        <div class="item_inner">
-            <div class="text_box">
+        <div class="item_General">
+            <div class="cajaText">
                 <h3>Fecha</h3>
-                <div class="buttons d-flex">
-                    <h5>{{punto.createDate | date:'MMM d, y, h:mm a'}}</h5>
+                <div class="text_final d-flex">
+                    <h5 *ngIf="punto.createDate !== undefined">{{punto.createDate | date:'MMM d, y, h:mm a'}}</h5>
+                    <ion-skeleton-text *ngIf="punto.createDate === undefined" animated style="width: 50%"></ion-skeleton-text>
                 </div>
             </div>
         </div>
       </ion-item>
       <ion-item>
-        <div class="item_inner">
-            <div class="text_box">
+        <div class="item_General">
+            <div class="cajaText">
                 <h3>Descripcion</h3>
-                <div class="buttons d-flex">
-                    <h5>{{punto.description}}</h5>
+                <div class="text_final d-flex">
+                    <h5 *ngIf="punto.description !== undefined">{{punto.description}}</h5>
+                    <ion-skeleton-text *ngIf="punto.description === undefined" animated style="width: 100%"></ion-skeleton-text>
                 </div>
             </div>
         </div>
       </ion-item>
     </div>
     <h1>Dirección</h1>
-        <div class="item_list">
+        <div class="lista_items">
             <ion-item>              
-              <!--<ion-icon slot="end" name="location-sharp" color="primary" ></ion-icon>-->
-              <div class="item_inner">
-                <div class="text_box">               
-                  <h3 *ngIf="direccion.numberOne !== null">{{direccion.streetType + ' ' + direccion.career + ' #' + direccion.numberOne + ' - ' + direccion.numberTwo}}</h3>
-                  <h3 *ngIf="direccion.numberOne === null">{{direccion.streetType + ' ' + direccion.career}}</h3>
-                  <h3>{{direccion.description}}</h3>
-                  <h3>Facatativá , {{direccion.neighborhood}}</h3>
+              <div class="item_General">
+                <div class="cajaText">               
+                  <h3 *ngIf="direccion.numberOne !== null && direccion.streetType !== undefined">{{direccion.streetType + ' ' + direccion.career + ' #' + direccion.numberOne + ' - ' + direccion.numberTwo}}</h3>
+                  <h3 *ngIf="direccion.numberOne === null && direccion.streetType !== undefined">{{direccion.streetType + ' ' + direccion.career}}</h3>
+                  <h3 *ngIf="direccion.description !== undefined">{{direccion.description}}</h3>
+                  <h3 *ngIf="direccion.neighborhood !== undefined">Facatativá , {{direccion.neighborhood}}</h3>
+
+                  <ion-skeleton-text *ngIf="direccion.streetType === undefined" animated style="width: 40%"></ion-skeleton-text>
+                  <ion-skeleton-text *ngIf="direccion.description === undefined" animated style="width: 30%"></ion-skeleton-text>
+                  <ion-skeleton-text *ngIf="direccion.neighborhood === undefined" animated style="width: 30%"></ion-skeleton-text>
                 </div>
               </div>
           </ion-item>

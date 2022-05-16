@@ -18,9 +18,9 @@
   <ion-list>
     <h2>{{listaRuta.length}} Rutas</h2>
     <ion-item *ngFor="let lista of listaRuta">
-      <div class="item_inner">          
+      <div class="item_General">          
           <div class="d-flex item_info">
-              <div class="address_info">
+              <div class="icono_info">
                   <div class="from_to d-flex">
                       <div class="icon_box d-flex">
                           <ion-icon class="zmdi zmdi-pin"></ion-icon>
@@ -38,12 +38,12 @@
                   </div>
               </div>
               <div class="item_info d-flex">
-                <div class="item_details">
+                <div class="detalles_ruta">
                   <h3 class="d-flex">
                       Material
-                      <span class="end order_status">
+                      <span class="end estado_ruta">
                         <div>
-                          {{lista.endDate | date:'MMM d, y, h:mm a' }}
+                          {{lista.endDate | date:'MMM d, y' }}
                         </div>
                       </span>
                   </h3>

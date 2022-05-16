@@ -2,7 +2,7 @@
     width: calc(100% - 47px);
     margin: 0 auto;    
 
-    .img_box {
+    .cajaImg {
         width: 210px;
         margin: 0 auto;
         margin-top: 36%;
@@ -23,8 +23,4 @@
             padding-top: 4px;
         }
     }
-}
-
-ion-footer {
-    --animate-duration: .4s !important;
 }

@@ -2,10 +2,15 @@
   <ion-toolbar>
       <ion-title>Mi Cuenta</ion-title>
   </ion-toolbar>
-  <div class="profile_info">
+  <div class="reciclador_perfil" *ngIf="reciclador !== null">
       <h2>{{reciclador.name + ' ' + reciclador.lastName}}</h2>
       <p>{{reciclador.phone}}</p>
       <p>{{reciclador.user?.email}}</p>
+  </div>
+  <div class="reciclador_perfil" *ngIf="reciclador === null">
+    <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
   </div>
 </ion-header>
 

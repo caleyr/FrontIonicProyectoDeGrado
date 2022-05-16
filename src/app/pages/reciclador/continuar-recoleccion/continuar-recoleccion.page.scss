@@ -8,7 +8,7 @@ ion-header {
         font-size: 25px;
     }
 
-    .order_info_button {
+    .info_reciclaje_btn {
         border-radius: 50px;
         height: 36px;
         font-size: 0.85rem;
@@ -27,6 +27,7 @@ ion-header {
 
         ion-icon {
             font-size: 1.1rem;
+            margin-left: 0;
             min-width: 27px;
             position: relative;
             top: -1.5px;
@@ -38,7 +39,7 @@ ion-header {
                 align-items: center;
             }
 
-            &.cloes {
+            &.cerrar_info {
                 display: none;
             }
         }
@@ -46,13 +47,13 @@ ion-header {
 
     ion-toolbar ion-title {
         .active {
-            .order_info_button {
+            .info_reciclaje_btn {
                 span {
                     &.info {
                         display: none;
                     }
 
-                    &.cloes {
+                    &.cerrar_info {
                         display: flex;
                         align-items: center;
                     }
@@ -63,7 +64,7 @@ ion-header {
 }
 
 ion-content {    
-    .order_info {
+    .info_reciclaje {
         position: absolute;
         left: 0;
         top: -100%;
@@ -75,7 +76,7 @@ ion-content {
         transition: all .5s;
         overflow: hidden;
    
-        .item_container {
+        .detalles_punto {
             position: relative;
             z-index: 9999;
             max-height: 201px;
@@ -107,27 +108,6 @@ ion-content {
             }
         }
    
-        .instruction {
-            background: var(--bg-color);
-            padding: 17px 15px;
-   
-            .img_box {
-                min-width: 33px;
-   
-                img {
-                    width: 20px;
-                    display: block;
-                }
-            }
-   
-            p {
-                margin: 0;
-                color: var(--text-black);
-                font-size: 0.84rem;
-                font-weight: 400;
-            }
-        }
-   
         &.active {
             top: 70px;
         }
@@ -150,10 +130,10 @@ ion-footer {
         padding: 14px 15px;
         box-shadow: none;
 
-        .card_header {
+        .detalles_reciclaje {
             padding-bottom: 15px;
 
-            .img_box {
+            .cajaImg {
                 min-width: 50px;
                 margin-right: 12px;
 
@@ -162,7 +142,7 @@ ion-footer {
                 }
             }
 
-            .text_box {
+            .cajaText {
                 width: 100%;
 
                 h2 {
@@ -187,7 +167,7 @@ ion-footer {
 
             }
 
-            .direction {
+            .item_foto {
                 border-radius: 50px;
                 height: 34px;
                 font-size: 0.85rem;
@@ -211,10 +191,10 @@ ion-footer {
             }
         }
 
-        .delivery_details {
+        .detalles_reciclador {
             position: relative;
 
-            .dotted {
+            .espacio {
                 height: fit-content;
                 display: block;
                 overflow: hidden;
@@ -234,7 +214,7 @@ ion-footer {
 
             }
 
-            .delivery_address {
+            .detalles_direccion {
                 position: relative;
                 align-items: flex-start;
                 padding-top: 10px;
@@ -254,7 +234,7 @@ ion-footer {
 
                 }
 
-                .text_box {
+                .cajaText {
                     h2 {
                         margin: 0;
                         color: var(--text-black);
@@ -273,34 +253,8 @@ ion-footer {
                        padding-top: 3px;
                     }
                 }
-
-                .iocn_box {
-                    min-width: 60px;
-                    width: fit-content;
-                    margin-top: 12px;
-
-                    ion-icon {
-                        color: var(--primary);
-                        font-size: 1rem;
-                        min-width: 26px;
-                    }
-                }
-
-                &:nth-child(1) {
-                    --animate-duration: .2s !important;
-                }
-
-                &:nth-child(2) {
-                    --animate-duration: .25s !important;
-                }
-
-                &:nth-child(3) {
-                    --animate-duration: .3s !important;
-                }
             }
         }
-
-
     }
 
     .button.btn {

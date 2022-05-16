@@ -17,20 +17,20 @@
         ion-col {
             padding: 10px;
 
-            .item_box {
+            .item_General {
                 background: var(--bg-color);
                 width: 100%;
                 border-radius: 5px;
                 padding: 18px 15px;
 
-                .item_img {
+                .cajaImg {
                     width: 75px;
                     display: block;
                     margin: auto;
                     margin-bottom: 16px;
                 }
 
-                .item_text {
+                .cajaText {
                     h3 {
                         margin: 0;
                         color: var(--text-black);
@@ -45,40 +45,6 @@
                         padding-top: 8px;
                         padding-bottom: 8px;
                     }
-                }
-            }
-
-            &.animate__animated.animate__zoomInUp {
-                &:nth-child(1) {
-                    --animate-duration: .15s;
-                }
-
-                &:nth-child(2) {
-                    --animate-duration: .2s;
-                }
-
-                &:nth-child(3) {
-                    --animate-duration: .25s;
-                }
-
-                &:nth-child(4) {
-                    --animate-duration: .3s;
-                }
-
-                &:nth-child(5) {
-                    --animate-duration: .35s;
-                }
-
-                &:nth-child(6) {
-                    --animate-duration: .4s;
-                }
-
-                &:nth-child(7) {
-                    --animate-duration: .45s;
-                }
-
-                &:nth-child(8) {
-                    --animate-duration: .5s;
                 }
             }
         }

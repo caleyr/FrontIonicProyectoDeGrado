@@ -21,16 +21,16 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <div class="tab_content">
+  <div class="pestañas">
     <ion-slides #slides (ionSlideDidChange)="sliderCambiado()">
       <ion-slide>
-        <ion-list>
+        <ion-list *ngIf="listaUsuarioReciclador !== null">
           <ion-item *ngFor="let lista of listaUsuarioReciclador" [routerLink]= "['/admin/lista-usuario-admin/ver-usuario-admin/',lista.role, lista.email, lista.id]">
-            <div class="item_inner d-flex"> 
-              <div class="img_box center_img">            
+            <div class="item_General d-flex"> 
+              <div class="cajaImg center_img">            
                 <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" class="crop_img">
               </div>
-              <div class="text_box">
+              <div class="cajaText">
                 <h3>
                   {{lista.email}}
                 </h3>
@@ -49,15 +49,32 @@
             </div>               
           </ion-item>
         </ion-list>
+
+        <ion-list *ngIf="listaUsuarioReciclador === null">
+          <ion-item *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]">
+            <div class="item_General d-flex"> 
+              <div class="cajaImg center_img">     
+                <ion-skeleton-text></ion-skeleton-text> 
+              </div>
+              <div class="cajaText">
+                <h3>
+                  <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                </h3>
+                <h4><ion-skeleton-text animated style="width: 20%"></ion-skeleton-text></h4>
+              </div>
+            </div>               
+          </ion-item>
+        </ion-list>
+
       </ion-slide>
       <ion-slide>
-        <ion-list>
+        <ion-list *ngIf="listaUsuarioTienda !== null">
           <ion-item *ngFor="let lista of listaUsuarioTienda" [routerLink]= "['/admin/lista-usuario-admin/ver-usuario-admin/',lista.role, lista.email, lista.id]">
-            <div class="item_inner d-flex"> 
-              <div class="img_box center_img">            
+            <div class="item_General d-flex"> 
+              <div class="cajaImg center_img">            
                 <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" class="crop_img">
               </div>
-              <div class="text_box">
+              <div class="cajaText">
                 <h3>
                   {{lista.email}}
                 </h3>
@@ -76,6 +93,23 @@
             </div>               
           </ion-item>
         </ion-list>
+
+        <ion-list *ngIf="listaUsuarioTienda === null">
+          <ion-item *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]">
+            <div class="item_General d-flex"> 
+              <div class="cajaImg center_img">     
+                <ion-skeleton-text></ion-skeleton-text> 
+              </div>
+              <div class="cajaText">
+                <h3>
+                  <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                </h3>
+                <h4><ion-skeleton-text animated style="width: 20%"></ion-skeleton-text></h4>
+              </div>
+            </div>               
+          </ion-item>
+        </ion-list>
+
       </ion-slide>
     </ion-slides>
   </div>

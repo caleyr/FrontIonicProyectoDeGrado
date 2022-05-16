@@ -13,12 +13,61 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list>
-    <h2>{{listaRuta.length}} Rutas</h2>
-    <ion-item *ngFor="let lista of listaRuta" [routerLink]= "['/admin/lista-ruta-admin/ver-ruta-admin/', lista.id]">
-      <div class="item_inner">          
+  <div *ngIf="listaRuta !== null">
+    <ion-list>
+      <h2>{{listaRuta.length}} Rutas</h2>
+      <ion-item *ngFor="let lista of listaRuta" [routerLink]= "['/admin/lista-ruta-admin/ver-ruta-admin/', lista.id]">
+        <div class="item_General">          
+            <div class="d-flex item_info">
+                <div class="icono_address">
+                    <div class="from_to d-flex">
+                        <div class="icon_box d-flex">
+                            <ion-icon class="zmdi zmdi-pin"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="dotted_icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="from_to d-flex">
+                        <div class="icon_box d-flex">
+                            <ion-icon class="zmdi zmdi-navigation"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="item_info d-flex">
+                  <div class="detalles_ruta">
+                    <h3 class="d-flex">
+                        {{lista.user?.email}}
+                        <span class="end fecha_end">
+                          <div *ngIf="lista.endDate !== '0001-01-01T00:00:00'">
+                            {{lista.endDate | date:'MMM d, y'}}
+                          </div>
+                        </span>
+                    </h3>
+                    <h4 class="d-flex">{{lista.startDate | date:'MMM d, y'}}</h4>
+                  </div> 
+                </div>                         
+            </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  
+    <ion-infinite-scroll threshold="150" [disabled]="recargarPagina" (ionInfinite)="cargarPage($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="crescent"
+        loadingText="Cargando...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
+  <ion-list *ngIf="listaRuta === null">
+    <h2>0 Rutas</h2>
+    <ion-item *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]">
+      <div class="item_General">          
           <div class="d-flex item_info">
-              <div class="address_info">
+              <div class="icono_address">
                   <div class="from_to d-flex">
                       <div class="icon_box d-flex">
                           <ion-icon class="zmdi zmdi-pin"></ion-icon>
@@ -36,16 +85,9 @@
                   </div>
               </div>
               <div class="item_info d-flex">
-                <div class="item_details">
-                  <h3 class="d-flex">
-                      {{lista.user?.email}}
-                      <span class="end order_status">
-                        <div *ngIf="lista.endDate !== '0001-01-01T00:00:00'">
-                          {{lista.endDate | date:'MMM d, y, h:mm a'}}
-                        </div>
-                      </span>
-                  </h3>
-                  <h4 class="d-flex">{{lista.startDate | date:'MMM d, y, h:mm a'}}</h4>
+                <div class="detalles_ruta">
+                  <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                  <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
                 </div> 
               </div>                         
           </div>

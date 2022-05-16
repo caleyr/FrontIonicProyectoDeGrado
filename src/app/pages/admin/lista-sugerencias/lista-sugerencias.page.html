@@ -22,7 +22,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list lines="none">
+  <ion-list lines="none" *ngIf="listaComentario !== null">
     <ion-item *ngFor="let lista of listaComentario">
       <div class="item_inner">
           <h5 class="d-flex">
@@ -31,6 +31,14 @@
           <p>
             {{lista.description}}
           </p>
+      </div>
+    </ion-item>
+  </ion-list>
+  <ion-list lines="none" *ngIf="listaComentario === null">
+    <ion-item *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]">
+      <div class="item_inner" style="width: 100%">
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
       </div>
     </ion-item>
   </ion-list>

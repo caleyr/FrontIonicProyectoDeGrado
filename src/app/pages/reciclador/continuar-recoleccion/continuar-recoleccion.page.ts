@@ -33,7 +33,7 @@ export class ContinuarRecoleccionPage implements OnInit, AfterViewInit {
     }
   });;
 
-  destino: CollectionPoint = new CollectionPoint();
+  destino: CollectionPoint = null;
 
   duracion = null;
   distancia = null;

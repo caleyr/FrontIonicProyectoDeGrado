@@ -21,90 +21,150 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <div class="tab_content">
+  <div class="pestañas">
     <ion-slides #slides (ionSlideDidChange)="sliderCambiado()">
       <ion-slide>
-        <ion-list lines="none">
-          <ion-item *ngFor="let lista of listaPuntosEspera" detailIcon="delete">
-            <ion-icon slot="end" class="btn_otps" name="trash-outline" (click)="presentAlert('Desea eliminar el punto de Recoleccion.', lista.id)"></ion-icon>
-            <div class="item_inner d-flex" [routerLink]= "['/residente/lista-recoleccion-residente/ver-recoleccion-residente/espera',lista.id]">
-                <div class="img_box center_img">
-                    <img src="{{lista.image}}" class="crop_img">
+        <ion-content>
+          <div *ngIf="listaPuntosEspera !== null">
+            <ion-list lines="none">
+              <ion-item *ngFor="let lista of listaPuntosEspera" detailIcon="delete">
+                <ion-icon slot="end" class="btn_otps" name="trash-outline" (click)="presentAlert('Desea eliminar el punto de Recoleccion.', lista.id)"></ion-icon>
+                <div class="item_General d-flex" [routerLink]= "['/residente/lista-recoleccion-residente/ver-recoleccion-residente/espera',lista.id]">
+                    <div class="cajaImg center_img">
+                        <img src="{{lista.image}}" class="crop_img">
+                    </div>
+                    <div class="cajaText">
+                        <h3>{{lista.typeOfMaterial}}</h3>
+                        <h4 class="d-flex">                
+                          <ion-icon class="zmdi zmdi-time ion-text-start"></ion-icon>
+                          {{lista.createDate | date: 'shortDate' }} <span>|</span> {{lista.createDate | date:'hh:mm a'}}
+                        </h4>  
+                        <h5 class="d-flex">
+                          {{lista.state}}
+                        </h5>
+                    </div>
                 </div>
-                <div class="text_box">
-                    <h3>{{lista.typeOfMaterial}}</h3>
-                    <h4 class="d-flex">                
-                      <ion-icon class="zmdi zmdi-time ion-text-start"></ion-icon>
-                      {{lista.createDate | date: 'shortDate' }} <span>|</span> {{lista.createDate | date:'hh:mm a'}}
-                    </h4>  
-                    <h5 class="d-flex">
-                      {{lista.state}}
-                    </h5>
-                </div>
-            </div>
-          </ion-item>
-        </ion-list>
-        <ion-infinite-scroll threshold="150" (ionInfinite)="cargarPageE($event)">
-          <ion-infinite-scroll-content
-            loadingSpinner="crescent"
-            loadingText="Cargando...">
-          </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
+              </ion-item>
+            </ion-list>
+            <ion-infinite-scroll threshold="150" [disabled]="recargarEspera" (ionInfinite)="cargarPageE($event)">
+              <ion-infinite-scroll-content
+                loadingSpinner="crescent"
+                loadingText="Cargando...">
+              </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </div>
+
+          <ion-list lines="none" *ngIf="listaPuntosEspera === null">
+            <ion-item *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]" detailIcon="delete">
+              <div class="item_General d-flex">
+                  <div class="cajaImg center_img">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                  </div>
+                  <div class="cajaText">
+                      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                      <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                      <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+                  </div>
+              </div>
+            </ion-item>
+          </ion-list>
+
+        </ion-content>
       </ion-slide>
       <ion-slide>
-        <ion-list lines="none">
-          <ion-item *ngFor="let lista of listaPuntosActivo" [routerLink]= "['/residente/lista-recoleccion-residente/ver-recoleccion-residente/activo',lista.id]" detailIcon="delete">
-            <div class="item_inner d-flex">
-                <div class="img_box center_img">
-                    <img src="{{lista.image}}" class="crop_img">
+        <ion-content>
+          <div *ngIf="listaPuntosActivo !== null">
+            <ion-list lines="none">
+              <ion-item *ngFor="let lista of listaPuntosActivo" [routerLink]= "['/residente/lista-recoleccion-residente/ver-recoleccion-residente/activo',lista.id]" detailIcon="delete">
+                <div class="item_General d-flex">
+                    <div class="cajaImg center_img">
+                        <img src="{{lista.image}}" class="crop_img">
+                    </div>
+                    <div class="cajaText">
+                        <h3>{{lista.typeOfMaterial}}</h3>
+                        <h4 class="d-flex">                
+                          <ion-icon class="zmdi zmdi-time ion-text-start"></ion-icon>
+                          {{lista.createDate | date: 'shortDate' }} <span>|</span> {{lista.createDate | date:'hh:mm a'}}
+                        </h4>  
+                        <h5 class="d-flex" style="color: var(--secondary);">
+                          {{lista.state}}
+                        </h5>
+                    </div>
                 </div>
-                <div class="text_box">
-                    <h3>{{lista.typeOfMaterial}}</h3>
-                    <h4 class="d-flex">                
-                      <ion-icon class="zmdi zmdi-time ion-text-start"></ion-icon>
-                      {{lista.createDate | date: 'shortDate' }} <span>|</span> {{lista.createDate | date:'hh:mm a'}}
-                    </h4>  
-                    <h5 class="d-flex" style="color: var(--secondary);">
-                      {{lista.state}}
-                    </h5>
-                </div>
-            </div>
-          </ion-item>
-        </ion-list>  
-        <ion-infinite-scroll threshold="150" (ionInfinite)="cargarPageA($event)">
-          <ion-infinite-scroll-content
-            loadingSpinner="crescent"
-            loadingText="Cargando...">
-          </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
+              </ion-item>
+            </ion-list>  
+            <ion-infinite-scroll threshold="150" [disabled]="recargarActivo" (ionInfinite)="cargarPageA($event)">
+              <ion-infinite-scroll-content
+                loadingSpinner="crescent"
+                loadingText="Cargando...">
+              </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </div>
+
+          <ion-list lines="none" *ngIf="listaPuntosActivo === null">
+            <ion-item *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]" detailIcon="delete">
+              <div class="item_General d-flex">
+                  <div class="cajaImg center_img">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                  </div>
+                  <div class="cajaText">
+                      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                      <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                      <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+                  </div>
+              </div>
+            </ion-item>
+          </ion-list>
+
+        </ion-content>
       </ion-slide>
       <ion-slide>
-        <ion-list lines="none">
-          <ion-item *ngFor="let lista of listaPuntosFinalizado" detailIcon="delete">
-            <ion-icon class="btn_otps" slot="end" name="chatbox-ellipses-outline" (click)="modalComentario(lista.routeId)"></ion-icon>
-            <div class="item_inner d-flex" [routerLink]= "['/residente/lista-recoleccion-residente/ver-recoleccion-residente/finalizado',lista.id]">
-                <div class="img_box center_img">
-                    <img src="{{lista.image}}" class="crop_img">
+        <ion-content>
+          <div *ngIf="listaPuntosFinalizado !== null">
+            <ion-list lines="none">
+              <ion-item *ngFor="let lista of listaPuntosFinalizado" detailIcon="delete">
+                <ion-icon class="btn_otps" slot="end" name="chatbox-ellipses-outline" (click)="modalComentario(lista.routeId)"></ion-icon>
+                <div class="item_General d-flex" [routerLink]= "['/residente/lista-recoleccion-residente/ver-recoleccion-residente/finalizado',lista.id]">
+                    <div class="cajaImg center_img">
+                        <img src="{{lista.image}}" class="crop_img">
+                    </div>
+                    <div class="cajaText">
+                        <h3>{{lista.typeOfMaterial}}</h3>
+                        <h4 class="d-flex">                
+                          <ion-icon class="zmdi zmdi-time ion-text-start"></ion-icon>
+                          {{lista.createDate | date: 'shortDate' }} <span>|</span> {{lista.createDate | date:'hh:mm a'}}
+                        </h4>  
+                        <h5 class="d-flex" style="color: var(--red_color);">
+                          {{lista.state}}
+                        </h5>
+                    </div>
                 </div>
-                <div class="text_box">
-                    <h3>{{lista.typeOfMaterial}}</h3>
-                    <h4 class="d-flex">                
-                      <ion-icon class="zmdi zmdi-time ion-text-start"></ion-icon>
-                      {{lista.createDate | date: 'shortDate' }} <span>|</span> {{lista.createDate | date:'hh:mm a'}}
-                    </h4>  
-                    <h5 class="d-flex" style="color: var(--red_color);">
-                      {{lista.state}}
-                    </h5>
-                </div>
-            </div>
-          </ion-item>
-        </ion-list> 
-        <ion-infinite-scroll threshold="150" (ionInfinite)="cargarPageF($event)">
-          <ion-infinite-scroll-content
-            loadingSpinner="crescent"
-            loadingText="Cargando...">
-          </ion-infinite-scroll-content>
-        </ion-infinite-scroll> 
+              </ion-item>
+            </ion-list> 
+            <ion-infinite-scroll threshold="150" [disabled]="recargarFinalizado"(ionInfinite)="cargarPageF($event)">
+              <ion-infinite-scroll-content
+                loadingSpinner="crescent"
+                loadingText="Cargando...">
+              </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </div>
+
+          <ion-list lines="none" *ngIf="listaPuntosFinalizado === null">
+            <ion-item *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]" detailIcon="delete">
+              <div class="item_General d-flex">
+                  <div class="cajaImg center_img">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                  </div>
+                  <div class="cajaText">
+                      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                      <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                      <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+                  </div>
+              </div>
+            </ion-item>
+          </ion-list>
+
+        </ion-content>
       </ion-slide>
     </ion-slides>
   </div>

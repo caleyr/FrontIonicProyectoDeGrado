@@ -55,14 +55,11 @@ ion-header {
                     width: 40px;
                 }
             }
-
-
         }
-
     }
 }
 
-.tab_content{
+.pestañas{
     ion-list {
         margin: 0;
         background: none;
@@ -76,17 +73,17 @@ ion-header {
             background: var(--white);
             margin-bottom: 20px;
     
-            .item_inner {
+            .item_General {
                 align-items: flex-start !important;
     
-                .img_box {
+                .cajaImg {
                     min-width: 60px;
                     height: 60px;
                     margin-right: 12px;
                     border-radius: 3px;
                 }
     
-                .text_box {
+                .cajaText {
                     width: 100%;
     
                     h3 {
@@ -103,34 +100,6 @@ ion-header {
                         font-weight: 400;
                         margin-bottom: 7px;
                         letter-spacing: .3px;
-    
-                        span {
-                            display: block;
-                            min-width: 20px;
-                            text-align: center;
-                            color: var(--primary);
-                        }
-    
-                        ion-icon {
-                            min-width: 16px;
-                            padding: 0 2px;
-                            font-size: .8rem;
-                        }
-                    }
-    
-                    h5 {
-                        margin: 0;
-                        color: var(--primary);
-                        font-size: .73rem;
-                        font-weight: 400;
-                        margin-bottom: 7px;
-                        letter-spacing: .3px;
-    
-                        ion-icon {
-                            min-width: 16px;
-                            padding: 0 2px;
-                            font-size: .8rem;
-                        }
                     }
                 }
             }

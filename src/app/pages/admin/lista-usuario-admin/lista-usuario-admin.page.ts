@@ -12,10 +12,10 @@ import { Subscription } from 'rxjs';
 })
 export class ListaUsuarioAdminPage implements OnInit {
 
-  lista: User[] = [];
-  listaUsuarioResidente: User[] = [];
-  listaUsuarioReciclador: User[] = [];
-  listaUsuarioTienda: User[] = [];
+  lista: User[] = null;
+  listaUsuarioResidente: User[] = null;
+  listaUsuarioReciclador: User[] = null;
+  listaUsuarioTienda: User[] = null;
   segment = 0;
 
   suscripcion : Subscription;
@@ -26,10 +26,10 @@ export class ListaUsuarioAdminPage implements OnInit {
 
   ngOnInit() {
     this.suscripcion = this.usuarioService.refresh$.subscribe(() =>{
-      this.lista = [];
-      this.listaUsuarioResidente = [];
-      this.listaUsuarioReciclador = [];
-      this.listaUsuarioTienda = [];
+      this.lista = null;
+      this.listaUsuarioResidente = null;
+      this.listaUsuarioReciclador = null;
+      this.listaUsuarioTienda = null;
       this.listar();
     })   
     this.listar();
@@ -55,12 +55,12 @@ export class ListaUsuarioAdminPage implements OnInit {
 
   doRefresh(event){
     setTimeout(()=>{
-      this.lista = [];
-      this.listaUsuarioResidente = [];
-      this.listaUsuarioReciclador = [];
-      this.listaUsuarioTienda = [];
+      this.lista = null;
+      this.listaUsuarioResidente = null;
+      this.listaUsuarioReciclador = null;
+      this.listaUsuarioTienda = null;
       this.listar();
       event.target.complete();
-    }, 1000);
+    }, 500);
   }
 }

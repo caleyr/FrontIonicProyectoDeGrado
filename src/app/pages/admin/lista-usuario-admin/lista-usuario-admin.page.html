@@ -28,9 +28,9 @@
     <ion-slides #slides (ionSlideDidChange)="sliderCambiado()">
       <ion-slide>
 
-        <ion-list *ngIf="listaUsuarioResidente.length !== 0">
+        <ion-list *ngIf="listaUsuarioResidente !== null">
           <ion-item *ngFor="let lista of listaUsuarioResidente" [routerLink]= "['/admin/lista-usuario-admin/ver-usuario-admin/',lista.role, lista.email, lista.id]">
-            <div class="itemGeneral d-flex"> 
+            <div class="item_General d-flex"> 
               <div class="cajaImg center_img">            
                 <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" class="crop_img">
               </div>
@@ -54,9 +54,9 @@
           </ion-item>
         </ion-list>
 
-        <ion-list *ngIf="listaUsuarioResidente.length === 0">
+        <ion-list *ngIf="listaUsuarioResidente === null">
           <ion-item *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]">
-            <div class="itemGeneral d-flex"> 
+            <div class="item_General d-flex"> 
               <div class="cajaImg center_img">     
                 <ion-skeleton-text></ion-skeleton-text> 
               </div>
@@ -72,9 +72,9 @@
 
       </ion-slide>
       <ion-slide>
-        <ion-list *ngIf="listaUsuarioReciclador.length !== 0">
+        <ion-list *ngIf="listaUsuarioReciclador !== null">
           <ion-item *ngFor="let lista of listaUsuarioReciclador" [routerLink]= "['/admin/lista-usuario-admin/ver-usuario-admin/',lista.role, lista.email, lista.id]">
-            <div class="itemGeneral d-flex"> 
+            <div class="item_General d-flex"> 
               <div class="cajaImg center_img">            
                 <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" class="crop_img">
               </div>
@@ -98,9 +98,9 @@
           </ion-item>
         </ion-list>
 
-        <ion-list *ngIf="listaUsuarioReciclador.length === 0">
+        <ion-list *ngIf="listaUsuarioReciclador === null">
           <ion-item *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]">
-            <div class="itemGeneral d-flex"> 
+            <div class="item_General d-flex"> 
               <div class="cajaImg center_img">     
                 <ion-skeleton-text></ion-skeleton-text> 
               </div>
@@ -116,9 +116,9 @@
 
       </ion-slide>
       <ion-slide>
-        <ion-list *ngIf="listaUsuarioTienda.length !== 0">
+        <ion-list *ngIf="listaUsuarioTienda !== null">
           <ion-item *ngFor="let lista of listaUsuarioTienda" [routerLink]= "['/admin/lista-usuario-admin/ver-usuario-admin/',lista.role, lista.email, lista.id]">
-            <div class="itemGeneral d-flex"> 
+            <div class="item_General d-flex"> 
               <div class="cajaImg center_img">            
                 <img src="https://www.uic.mx/posgrados/files/2018/05/default-user.png" class="crop_img">
               </div>
@@ -142,7 +142,7 @@
           </ion-item>
         </ion-list>
 
-        <ion-list *ngIf="listaUsuarioTienda.length === 0">
+        <ion-list *ngIf="listaUsuarioTienda === null">
           <ion-item *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]">
             <div class="itemGeneral d-flex"> 
               <div class="cajaImg center_img">     

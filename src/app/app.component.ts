@@ -6,7 +6,6 @@ import { ApiService } from './services/api.service';
 import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
 import { Storage } from '@capacitor/storage';
-import { User } from './model/User';
 import { Platform } from '@ionic/angular';
 import { FcmService } from './services/fcm.service';
 const ACCESS_TOKEN_KEY = 'my-access-token';
@@ -32,7 +31,8 @@ export class AppComponent{
     private fcmService : FcmService,
     private userService : UserService
     ) {
-      this.initializeApp();     
+      this.initializeApp();
+        
   }
 
   async initializeApp(){

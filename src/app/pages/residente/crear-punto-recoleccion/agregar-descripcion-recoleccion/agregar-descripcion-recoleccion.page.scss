@@ -68,31 +68,6 @@ ion-list {
                 }
             }
         }
-        &.store_timings{
-            padding: 0;
-            margin: 0;
-            ion-item {
-                padding-bottom: 0;                
-                ion-row{
-                    padding: 0;
-                    margin: 0;
-                    ion-col{
-                        padding: 0;
-                        margin: 0;
-                    }
-                }   
-            }          
-        }
-
-        .text_detail{
-            margin: 0;
-            color: var(--primary);
-            text-transform: uppercase;
-            font-size: .73rem;
-            letter-spacing: 1.5px;
-            padding-top: 7px;
-            padding-bottom: 10px;
-        }
 
         h3 {
             margin: 0;

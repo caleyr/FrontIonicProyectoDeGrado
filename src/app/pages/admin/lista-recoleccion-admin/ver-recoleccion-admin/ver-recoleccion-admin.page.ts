@@ -35,7 +35,7 @@ export class VerRecoleccionAdminPage implements OnInit {
       }); 
     }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.obtenerPunto();
   }
 

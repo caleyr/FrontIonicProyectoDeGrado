@@ -17,11 +17,11 @@ import { IfStmt } from '@angular/compiler';
 })
 export class VerUsuarioAdminPage implements OnInit {
 
-  residente: Resident = new Resident;
-  reciclador: Recycler = new Recycler;
+  residente: Resident = new Resident();
+  reciclador: Recycler = new Recycler();
   tienda: Shop = new Shop;
 
-  user: User = new User;  
+  user: User = new User();  
   estado : boolean;
   estadoCambio : boolean;
   listaDireccion: Address[] = [];
@@ -50,7 +50,7 @@ export class VerUsuarioAdminPage implements OnInit {
       this.user = result.data;
       this.estado = result.data.state;      
       this.obtenerDatos();
-    });
+    });    
   }
 
   obtenerDatos(){
@@ -67,7 +67,8 @@ export class VerUsuarioAdminPage implements OnInit {
       this.usuarioService.obtenerInfoTienda(this.email).subscribe(results =>{
         this.tienda = results.data;
         if(results.data.address !== null){
-          this.listaDireccion = results.data.address;
+          this.listaDireccion.push(results.data.address);
+          
         }
         this.listaMateriales = results.data.orderList;
         console.log(results);

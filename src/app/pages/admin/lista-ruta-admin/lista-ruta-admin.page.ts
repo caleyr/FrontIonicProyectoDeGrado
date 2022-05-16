@@ -12,8 +12,10 @@ import { UserService } from '../../../services/user.service';
 })
 export class ListaRutaAdminPage implements OnInit {
   
-  listUser : User[] = [];
-  listaRuta : Route[] = [];
+  listaRuta : Route[] = null;
+  cantidad = 0;
+  contador = 0;
+  recargarPagina = false;
 
   constructor(
     private rutaService : RutaService,
@@ -21,13 +23,21 @@ export class ListaRutaAdminPage implements OnInit {
     ) {      
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.listar();
   }
 
   listar() {
     this.rutaService.obtenerListaRuta(0,10).subscribe(data => {
       this.listaRuta = data.data.records;
+      this.cantidad = data.data.numberOfRecords;
+      this.cargarUsuario();
+    });
+  }
+
+  listarPagina() {
+    this.rutaService.obtenerListaRuta(this.contador,10).subscribe(data => {
+      this.listaRuta = this.listaRuta.concat(data.data.records);
       this.cargarUsuario();
     });
   }
@@ -42,10 +52,27 @@ export class ListaRutaAdminPage implements OnInit {
     }
   }
 
+  cargarPage(event){    
+    setTimeout(() => {
+      this.contador++;
+      if(this.listaRuta.length === this.cantidad){     
+        event.target.complete();     
+        this.recargarPagina = true;
+      }else{
+        this.listarPagina();
+        event.target.complete();
+      }
+    }, 500);
+  }
+
   doRefresh(event){
     setTimeout(()=>{
+      this.listaRuta  = null;
+      this.recargarPagina = false;
+      this.cantidad = 0;
+      this.contador = 0;
       this.listar();
       event.target.complete();
-    }, 1500);
+    }, 500);
   }
 }

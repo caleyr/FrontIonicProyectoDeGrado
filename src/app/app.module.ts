@@ -10,6 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common
 import { ReactiveFormsModule } from '@angular/forms';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { InterceptorService } from './services/interceptor.service';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

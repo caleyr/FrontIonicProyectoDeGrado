@@ -8,20 +8,12 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'inicio',
-    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
-  },
-  {
     path: 'usuarios',
     loadChildren: () => import('./pages/usuarios/usuarios.module').then( m => m.UsuariosPageModule)
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'punto-recoleccion',
-    loadChildren: () => import('./pages/punto-recoleccion/punto-recoleccion.module').then( m => m.PuntoRecoleccionPageModule)
   },
   {
     path: 'admin',

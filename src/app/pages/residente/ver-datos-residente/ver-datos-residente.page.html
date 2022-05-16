@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start" mode="md">
+      <ion-text_final slot="start" mode="md">
         <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
-      </ion-buttons>
+      </ion-text_final>
       <ion-title>
         <div class="title_inner d-flex">
           <span class="offline">Ver Perfil</span>
@@ -14,48 +14,52 @@
 
 <ion-content class="bg_color" fullscreen>
   <ion-list lines="none">      
-      <div class="item_list">
+      <div class="lista_Datos">
         <h1>Informacion del Usuario</h1>
         <ion-item>
-          <div class="item_inner">
-              <div class="text_box">
+          <div class="item_General">
+              <div class="cajaText">
                   <h3>Correo</h3>
-                  <div class="buttons d-flex">
-                      <h5>{{usuario.email}}</h5>
+                  <div class="text_final d-flex">
+                      <h5 *ngIf="usuario.email !== undefined">{{usuario.email}}</h5>
+                      <ion-skeleton-text animated style="width: 40%" *ngIf="usuario.email === undefined"></ion-skeleton-text>
                   </div>
               </div>
           </div>
         </ion-item>
       </div>
 
-      <div class="item_list">
+      <div class="lista_Datos">
         <h1>Datos Personales</h1>
         <ion-item>
-            <div class="item_inner">
-                <div class="text_box">
+            <div class="item_General">
+                <div class="cajaText">
                     <h3>Nombre</h3>
-                    <div class="buttons d-flex">
-                        <h5>{{residente.name}}</h5>
+                    <div class="text_final d-flex">
+                        <h5 *ngIf="residente.name !== undefined">{{residente.name}}</h5>
+                        <ion-skeleton-text animated style="width: 40%" *ngIf="residente.name === undefined"></ion-skeleton-text>
                     </div>
                 </div>
             </div>
         </ion-item>
         <ion-item>
-          <div class="item_inner">
-              <div class="text_box">
+          <div class="item_General">
+              <div class="cajaText">
                   <h3>Apellido</h3>
-                  <div class="buttons d-flex">
-                      <h5>{{residente.lastName}}</h5>
+                  <div class="text_final d-flex">
+                      <h5 *ngIf="residente.lastName !== undefined">{{residente.lastName}}</h5>
+                      <ion-skeleton-text animated style="width: 40%" *ngIf="residente.lastName === undefined"></ion-skeleton-text>
                   </div>
               </div>
           </div>
       </ion-item>
         <ion-item>
-          <div class="item_inner">
-              <div class="text_box">
+          <div class="item_General">
+              <div class="cajaText">
                   <h3>Teléfono</h3>
-                  <div class="buttons d-flex">
-                      <h5>{{residente.phone}}</h5>
+                  <div class="text_final d-flex">
+                      <h5 *ngIf="residente.phone !== undefined">{{residente.phone}}</h5>
+                      <ion-skeleton-text *ngIf="residente.phone === undefined" animated style="width: 40%"></ion-skeleton-text>
                   </div>
               </div>
           </div>
@@ -72,10 +76,10 @@
       <div *ngIf="direccion.length!==0">        
         <h1>Direccion</h1>
         <ion-list>
-          <div class="item_list">
+          <div class="lista_Datos">
               <ion-item *ngFor="let listaD of direccion" (click)="actualizarDireccion(listaD)">
-                <div class="item_inner">
-                    <div class="text_box">               
+                <div class="item_General">
+                    <div class="cajaText">               
                       <h3 *ngIf="listaD.numberOne !== null">{{listaD.streetType + ' ' + listaD.career + ' #' + listaD.numberOne + ' - ' + listaD.numberTwo}}</h3>
                       <h3 *ngIf="listaD.numberOne === null">{{listaD.streetType + ' ' + listaD.career}}</h3>
                       <h3>{{listaD.description}}</h3>

@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class VerCuentaRecicladorPage implements OnInit {
 
-  reciclador : Recycler = new Recycler();
+  reciclador : Recycler = null;
   suscripcion : Subscription;
 
   constructor(    

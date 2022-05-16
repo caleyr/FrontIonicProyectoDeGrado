@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class VerCuentaTiendaPage implements OnInit {
 
-  tienda : Shop = new Shop();
+  tienda : Shop = null;
   suscripcion : Subscription;
 
   constructor(    
