@@ -3,9 +3,14 @@
     <div class="yellow_div"></div>
   </div>
 
-  <div class="lower_div">
+  <div class="banner">
+    <div class="logo ion-text-center">
+        <img src="assets/icon/escudo_udec.png">
+    </div>
+  </div>
+
+  <div class="lower_div">    
     <form [formGroup]="credentials" (ngSubmit)="login()">
-      <ion-label class="head_lbl">Login</ion-label>
 
       <ion-label class="small_lbl">Correo</ion-label>
       <ion-input type="email" placeholder="Correo" inputmode="email" formControlName="email"></ion-input>

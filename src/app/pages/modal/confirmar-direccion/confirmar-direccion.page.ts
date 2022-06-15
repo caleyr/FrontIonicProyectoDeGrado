@@ -133,7 +133,7 @@ export class ConfirmarDireccionPage implements AfterViewInit {
               if(this.rol === 'residente'){
                 this.router.navigateByUrl('/residente/ver-datos-residente', { replaceUrl: true });
               }else{
-                this.router.navigateByUrl('/tienda/ver-datos-tienda', { replaceUrl: true });
+                this.router.navigateByUrl('/tabs-tienda/ver-datos-tienda', { replaceUrl: true });
               }
             }
             
